@@ -14,10 +14,12 @@
   "dependencies": {
     "esprima": "4.0.1",
     "glob": "7.1.3",
-    "mocha": "5.2.0"
+    "mocha": "5.2.0",
+    "onchange": "4.1.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "watch-tests": "./node_modules/.bin/onchange 'exercises/*.js' -- npm test"
   },
   "license": "ISC"
 }

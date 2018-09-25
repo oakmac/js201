@@ -27,6 +27,14 @@ npm test
 
 The goal is to get the test suite to pass all conditions. Good luck!
 
+## Continuously Run Test Suite
+
+You may want to run the test suite anytime a file in `exercises/` changes.
+
+```sh
+npm run watch-tests
+```
+
 ## License
 
 [ISC License](LICENSE.md)

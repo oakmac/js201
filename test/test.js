@@ -253,12 +253,14 @@ function checkNumberJoiners () {
     assert(isFn(module.numberJoinerFancy), 'function "numberJoinerFancy" not found')
   })
 
+  // TODO: parse the JS here and make sure they used a "while" loop
   it('"numberJoinerWhile" function', function () {
     assert.deepStrictEqual(module.numberJoinerWhile(1, 10), '1_2_3_4_5_6_7_8_9_10', "numberJoinerWhile(1, 10) should return '1_2_3_4_5_6_7_8_9_10'")
     assert.deepStrictEqual(module.numberJoinerWhile(12, 14), '12_13_14', "numberJoinerWhile(12, 14) should return '12_13_14'")
     // TODO: add some more test cases here
   })
 
+  // TODO: parse the JS here and make sure they used a "for" loop
   it('"numberJoinerFor" function', function () {
     assert.deepStrictEqual(module.numberJoinerFor(1, 10), '1_2_3_4_5_6_7_8_9_10', "numberJoinerFor(1, 10) should return '1_2_3_4_5_6_7_8_9_10'")
     assert.deepStrictEqual(module.numberJoinerFor(12, 14), '12_13_14', "numberJoinerFor(12, 14) should return '12_13_14'")
@@ -521,9 +523,16 @@ function checkRockPaperScissors () {
 
   it('"rockPaperScissors" function', function () {
     assert.deepStrictEqual(module.rockPaperScissors('rock', 'scissors'), 'player 1')
+    assert.deepStrictEqual(module.rockPaperScissors('paper', 'rock'), 'player 1')
+    assert.deepStrictEqual(module.rockPaperScissors('scissors', 'paper'), 'player 1')
+
+    assert.deepStrictEqual(module.rockPaperScissors('scissors', 'rock'), 'player 2')
     assert.deepStrictEqual(module.rockPaperScissors('rock', 'paper'), 'player 2')
+    assert.deepStrictEqual(module.rockPaperScissors('paper', 'scissors'), 'player 2')
+
+    assert.deepStrictEqual(module.rockPaperScissors('rock', 'rock'), 'draw')
     assert.deepStrictEqual(module.rockPaperScissors('paper', 'paper'), 'draw')
-    // TODO: add some more test cases here
+    assert.deepStrictEqual(module.rockPaperScissors('scissors', 'scissors'), 'draw')
   })
 }
 
@@ -531,28 +540,46 @@ function checkRockPaperScissors () {
 // Tic Tac Toe
 // -----------------------------------------------------------------------------
 
-const tttBoard1 = [
+const oWinHorizontal = [
   ['O', 'O', 'O'],
   ['X', null, 'X'],
   [null, 'X', null]
 ]
 
-const tttBoard2 = [
+const oWinVertical = [
+  ['X', null, 'O'],
+  ['X', null, 'O'],
+  [null, 'X', 'O']
+]
+
+const oWinDiagonal = [
+  ['X', null, 'O'],
+  ['X', 'O', null],
+  ['O', 'X', null]
+]
+
+const xWinHorizontal = [
+  ['X', 'X', 'X'],
+  ['O', null, 'O'],
+  [null, 'O', null]
+]
+
+const xWinVertical = [
   ['O', 'X', 'O'],
   ['O', 'X', null],
   [null, 'X', null]
 ]
 
-const tttBoard3 = [
-  ['O', 'X', 'O'],
-  ['O', 'O', null],
-  [null, 'X', 'X']
-]
-
-const tttBoard4 = [
+const xWinDiagonal = [
   ['O', null, 'X'],
   ['O', 'X', null],
   ['X', 'O', 'X']
+]
+
+const tttBoardDraw = [
+  ['O', 'X', 'O'],
+  ['O', 'O', null],
+  [null, 'X', 'X']
 ]
 
 function checkTicTacToe () {
@@ -574,10 +601,15 @@ function checkTicTacToe () {
   })
 
   it('"ticTacToe" function', function () {
-    assert.deepStrictEqual(module.ticTacToe(tttBoard1), 'O')
-    assert.deepStrictEqual(module.ticTacToe(tttBoard2), 'X')
-    assert.deepStrictEqual(module.ticTacToe(tttBoard3), null)
-    assert.deepStrictEqual(module.ticTacToe(tttBoard4), 'X')
+    assert.deepStrictEqual(module.ticTacToe(oWinHorizontal), 'O')
+    assert.deepStrictEqual(module.ticTacToe(oWinVertical), 'O')
+    assert.deepStrictEqual(module.ticTacToe(oWinDiagonal), 'O')
+
+    assert.deepStrictEqual(module.ticTacToe(xWinHorizontal), 'X')
+    assert.deepStrictEqual(module.ticTacToe(xWinVertical), 'X')
+    assert.deepStrictEqual(module.ticTacToe(xWinDiagonal), 'X')
+
+    assert.deepStrictEqual(module.ticTacToe(tttBoardDraw), null)
   })
 }
 
