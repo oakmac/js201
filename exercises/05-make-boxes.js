@@ -1,7 +1,7 @@
-// Write a function "printSquare" which is given a size and prints a square of
+// Write a function "makeSquare" which is given a size and returns a square of
 // that size using asterisks.
 // Example:
-// printSquare(5)
+// makeSquare(5)
 // *****
 // *****
 // *****
@@ -11,10 +11,10 @@
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Write a function "printBox" which is given a width and height and prints a
+// Write a function "makeBox" which is given a width and height and returns a
 // hollow box of those dimensions.
 // Example:
-// printBox(6, 4)
+// makeBox(6, 4)
 // ******
 // *    *
 // *    *
@@ -23,11 +23,11 @@
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Write a function "printBanner" which is given some text and prints a banner
+// Write a function "makeBanner" which is given some text and returns a banner
 // with a border surrounding the text. The border should stretch to the length
 // of the text.
 // Example:
-// printBanner('Welcome to DigitalCrafts')
+// makeBanner('Welcome to DigitalCrafts')
 // ****************************
 // * Welcome to DigitalCrafts *
 // ****************************

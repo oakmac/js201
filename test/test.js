@@ -332,6 +332,56 @@ function checkNumberJoiners () {
 }
 
 // -----------------------------------------------------------------------------
+// Make Boxes
+// -----------------------------------------------------------------------------
+
+function checkMakeBoxes () {
+  const moduleFileName = '../' + moduleName('exercises/05-make-boxes.js')
+  let module = null
+  try {
+    module = require(moduleFileName)
+  } catch (e) { }
+
+  if (!module) {
+    it('Unable to read ' + moduleFileName, function () {
+      assert.fail('Unable to read ' + moduleFileName)
+    })
+    return
+  }
+
+  it('05-make-boxes.js should have three functions: "makeSquare", "makeBox", and "makeBanner"', function () {
+    assert(isFn(module.makeSquare), 'function "makeSquare" not found')
+    assert(isFn(module.makeBox), 'function "makeBox" not found')
+    assert(isFn(module.makeBanner), 'function "makeBanner" not found')
+  })
+
+  it('"makeSquare" function', function () {
+    assert.deepStrictEqual(module.makeSquare(0), '')
+    assert.deepStrictEqual(module.makeSquare(1), '*')
+    assert.deepStrictEqual(module.makeSquare(2), '**\n**')
+    assert.deepStrictEqual(module.makeSquare(3), '***\n***\n***')
+    assert.deepStrictEqual(module.makeSquare(5), '*****\n*****\n*****\n*****\n*****')
+  })
+
+  it('"makeBox" function', function () {
+    assert.deepStrictEqual(module.makeBox(0, 0), '')
+    assert.deepStrictEqual(module.makeBox(1, 1), '*')
+    assert.deepStrictEqual(module.makeBox(2, 1), '**')
+    assert.deepStrictEqual(module.makeBox(3, 2), '***\n***')
+    assert.deepStrictEqual(module.makeBox(3, 3), '***\n* *\n***')
+    assert.deepStrictEqual(module.makeBox(6, 4), '******\n*    *\n*    *\n******')
+    assert.deepStrictEqual(module.makeBox(3, 5), '***\n* *\n* *\n* *\n***')
+  })
+
+  it('"makeBanner" function', function () {
+    assert.deepStrictEqual(module.makeBanner(''), '****\n*  *\n****')
+    assert.deepStrictEqual(module.makeBanner('x'), '*****\n* x *\n*****')
+    assert.deepStrictEqual(module.makeBanner('Welcome to DigitalCrafts'), '****************************\n* Welcome to DigitalCrafts *\n****************************')
+    // TODO: should we add a test case here for a newline in the text?
+  })
+}
+
+// -----------------------------------------------------------------------------
 // Factors
 // -----------------------------------------------------------------------------
 
@@ -680,8 +730,7 @@ if (allSyntaxValid) {
   describe('Madlib', checkMadlib)
   describe('Tip Calculator', checkTipCalculator)
   describe('Number Joiners', checkNumberJoiners)
-  // TODO: figure out how to check these
-  // describe('Box Printers', checkBoxPrinters)
+  describe('Make Boxes', checkMakeBoxes)
   describe('Factors', checkFactors)
   describe('Caesar Cipher', checkCaesarCipher)
   describe('Leetspeak', checkLeetspeak)
