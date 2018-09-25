@@ -321,6 +321,46 @@ function checkFactors () {
 }
 
 // -----------------------------------------------------------------------------
+// Caesar Ciphers
+// -----------------------------------------------------------------------------
+
+function checkCaesarCipher () {
+  const moduleFileName = '../' + moduleName('exercises/07-caesar-cipher.js')
+  let module = null
+  try {
+    module = require(moduleFileName)
+  } catch (e) { }
+
+  if (!module) {
+    it('Unable to read ' + moduleFileName, function () {
+      assert.fail('Unable to read ' + moduleFileName)
+    })
+    return
+  }
+
+  it('07-caesar-cipher.js should have two functions: "cipher" and "decipher"', function () {
+    assert(isFn(module.cipher), 'function "cipher" not found')
+    assert(isFn(module.decipher), 'function "decipher" not found')
+  })
+
+  it('"cipher" function', function () {
+    assert.deepStrictEqual(module.cipher('Genius without education is like silver in the mine', 5),
+      'ljsnzx bnymtzy jizhfynts nx qnpj xnqajw ns ymj rnsj')
+    assert.deepStrictEqual(module.cipher('We hold these truths to be self-evident', 8),
+      'em pwtl bpmam bzcbpa bw jm amtn-mdqlmvb')
+    assert.deepStrictEqual(module.cipher('Cryptanalysis is the art of breaking codes and ciphers.', 25),
+      'bqxoszmzkxrhr hr sgd zqs ne aqdzjhmf bncdr zmc bhogdqr.')
+  })
+
+  it('"decipher" function', function () {
+    assert.deepStrictEqual(module.decipher('cvvcem cv fcyp!', 2), 'attack at dawn!')
+    assert.deepStrictEqual(module.decipher('ehz czlod otgpcrpo ty l hzzo', 11), 'two roads diverged in a wood')
+    assert.deepStrictEqual(module.decipher('bqxoszmzkxrhr hr sgd zqs ne aqdzjhmf bncdr zmc bhogdqr.', 25),
+      'Cryptanalysis is the art of breaking codes and ciphers.')
+  })
+}
+
+// -----------------------------------------------------------------------------
 // Leetspeak
 // -----------------------------------------------------------------------------
 
@@ -424,6 +464,40 @@ function checkNumberArrays () {
 }
 
 // -----------------------------------------------------------------------------
+// Matrix Math
+// -----------------------------------------------------------------------------
+
+function checkMatrixMath () {
+  const moduleFileName = '../' + moduleName('exercises/11-matrix-math.js')
+  let module = null
+  try {
+    module = require(moduleFileName)
+  } catch (e) { }
+
+  if (!module) {
+    it('Unable to read ' + moduleFileName, function () {
+      assert.fail('Unable to read ' + moduleFileName)
+    })
+    return
+  }
+
+  it('11-matrix-math.js should have two functions: "matrixAdd" and "matrixMultiply"', function () {
+    assert(isFn(module.matrixAdd), 'function "matrixAdd" not found')
+    assert(isFn(module.matrixMultiply), 'function "matrixMultiply" not found')
+  })
+
+  it('"matrixAdd" function', function () {
+    assert.deepStrictEqual(module.matrixAdd([[1, 3], [2, 4]], [[5, 2], [1, 0]]), [[6, 5], [3, 4]])
+    // TODO: add some more test cases here
+  })
+
+  it('"matrixMultiply" function', function () {
+    assert.deepStrictEqual(module.matrixMultiply([[2, 4], [3, 4]], [[5, 2], [3, 1]]), [[22, 8], [27, 10]])
+    // TODO: add some more test cases here
+  })
+}
+
+// -----------------------------------------------------------------------------
 // Rock Paper Scissors
 // -----------------------------------------------------------------------------
 
@@ -523,11 +597,11 @@ if (allSyntaxValid) {
   // TODO: figure out how to check these
   // describe('Box Printers', checkBoxPrinters)
   describe('Factors', checkFactors)
-  // TODO: test caesar cipher
+  describe('Caesar Cipher', checkCaesarCipher)
   describe('Leetspeak', checkLeetspeak)
   describe('Long-long Vowels', checkLongLongVowels)
   describe('Number Arrays', checkNumberArrays)
-  // TODO: matrix math
+  describe('Matrix Math', checkMatrixMath)
   describe('Rock Paper Scissors', checkRockPaperScissors)
   describe('Tic Tac Toe', checkTicTacToe)
   destroyModuleFiles()

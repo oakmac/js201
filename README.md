@@ -19,11 +19,13 @@ This will install a folder named `node_modules/` into this folder.
 You will be writing functions in the JavaScript files found in the `exercises/`
 folder.
 
-TODO: explain the test suite here
+Write your functions and then run:
 
 ```sh
 npm test
 ```
+
+The goal is to get the test suite to pass all conditions. Good luck!
 
 ## License
 
