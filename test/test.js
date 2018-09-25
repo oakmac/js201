@@ -4,7 +4,7 @@
 // Requires
 // -----------------------------------------------------------------------------
 
-const fs = require('fs')
+const fs = require('fs-plus')
 const glob = require('glob')
 const assert = require('assert')
 const esprima = require('esprima')
@@ -14,6 +14,7 @@ const esprima = require('esprima')
 // -----------------------------------------------------------------------------
 
 const exerciseFiles = glob.sync('exercises/*.js')
+const modulesDir = 'exercises-modules/'
 const utf8 = 'utf8'
 const squigglyLine = '// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n'
 const exportsComment = '\n\n\n\n\n' +
@@ -45,7 +46,8 @@ function getTopLevelFunctions (syntaxTree) {
 
 // example filename --> module filename
 function moduleName (f) {
-  return f.replace('.js', '.module.js')
+  return f.replace('exercises/', modulesDir)
+          .replace('.js', '.module.js')
 }
 
 function moduleExportStatement (fnName) {
@@ -65,15 +67,14 @@ function createModuleFile (f) {
 }
 
 function createModuleFiles () {
+  if (!fs.existsSync(modulesDir)) {
+    fs.mkdirSync(modulesDir)
+  }
   exerciseFiles.forEach(createModuleFile)
 }
 
-function deleteModuleFile (f) {
-  fs.unlinkSync(moduleName(f))
-}
-
 function destroyModuleFiles () {
-  exerciseFiles.forEach(deleteModuleFile)
+  fs.removeSync(modulesDir)
 }
 
 // -----------------------------------------------------------------------------
