@@ -253,18 +253,28 @@ function checkNumberJoiners () {
     assert(isFn(module.numberJoinerFancy), 'function "numberJoinerFancy" not found')
   })
 
-  // TODO: parse the JS here and make sure they used a "while" loop
   it('"numberJoinerWhile" function', function () {
-    assert.deepStrictEqual(module.numberJoinerWhile(1, 10), '1_2_3_4_5_6_7_8_9_10', "numberJoinerWhile(1, 10) should return '1_2_3_4_5_6_7_8_9_10'")
-    assert.deepStrictEqual(module.numberJoinerWhile(12, 14), '12_13_14', "numberJoinerWhile(12, 14) should return '12_13_14'")
-    // TODO: add some more test cases here
+    // TODO: parse the JS here and make sure they used a "while" loop
+    assert.deepStrictEqual(module.numberJoinerWhile(1, 1), '1',
+      "numberJoinerWhile(1, 1) should return '1'")
+    assert.deepStrictEqual(module.numberJoinerWhile(1, 10), '1_2_3_4_5_6_7_8_9_10',
+      "numberJoinerWhile(1, 10) should return '1_2_3_4_5_6_7_8_9_10'")
+    assert.deepStrictEqual(module.numberJoinerWhile(12, 14), '12_13_14',
+      "numberJoinerWhile(12, 14) should return '12_13_14'")
+    assert.deepStrictEqual(module.numberJoinerWhile(-2, 3), '-2_-1_0_1_2_3',
+      "numberJoinerWhile(-2, 3) should return '-2_-1_0_1_2_3'")
   })
 
-  // TODO: parse the JS here and make sure they used a "for" loop
   it('"numberJoinerFor" function', function () {
-    assert.deepStrictEqual(module.numberJoinerFor(1, 10), '1_2_3_4_5_6_7_8_9_10', "numberJoinerFor(1, 10) should return '1_2_3_4_5_6_7_8_9_10'")
-    assert.deepStrictEqual(module.numberJoinerFor(12, 14), '12_13_14', "numberJoinerFor(12, 14) should return '12_13_14'")
-    // TODO: add some more test cases here
+    // TODO: parse the JS here and make sure they used a "for" loop
+    assert.deepStrictEqual(module.numberJoinerFor(1, 1), '1',
+      "numberJoinerFor(1, 1) should return '1'")
+    assert.deepStrictEqual(module.numberJoinerFor(1, 10), '1_2_3_4_5_6_7_8_9_10',
+      "numberJoinerFor(1, 10) should return '1_2_3_4_5_6_7_8_9_10'")
+    assert.deepStrictEqual(module.numberJoinerFor(12, 14), '12_13_14',
+      "numberJoinerFor(12, 14) should return '12_13_14'")
+    assert.deepStrictEqual(module.numberJoinerFor(-2, 3), '-2_-1_0_1_2_3',
+      "numberJoinerFor(-2, 3) should return '-2_-1_0_1_2_3'")
   })
 
   it('"numberJoinerFancy" function', function () {
@@ -283,7 +293,10 @@ function checkNumberJoiners () {
       '3***BANANAS***4***BANANAS***5***BANANAS***6',
       "numberJoinerFancy(3, 6, '***BANANAS***') should return '3***BANANAS***4***BANANAS***5***BANANAS***6'"
     )
-    // TODO: add some more test cases here
+    assert.deepStrictEqual(module.numberJoinerFancy(1, 1), '1',
+      "numberJoinerFancy(1, 1) should return '1'")
+    assert.deepStrictEqual(module.numberJoinerFancy(-2, 3, 'xx'), '-2xx-1xx0xx1xx2xx3',
+      "numberJoinerFancy(-2, 3, 'xx') should return '-2xx-1xx0xx1xx2xx3'")
   })
 
   // TODO: add a function to that module that allows number to be in any order
@@ -318,7 +331,6 @@ function checkFactors () {
     assert.deepStrictEqual(module.factors(37), [1, 37], 'factors(37) should return [1, 37]')
     assert.deepStrictEqual(module.factors(48), [1, 2, 3, 4, 6, 8, 12, 16, 24, 48], 'factors(48) should return [1, 2, 3, 4, 6, 8, 12, 16, 24, 48]')
     assert.deepStrictEqual(module.factors(96), [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 96], 'factors(96) should return [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 96]')
-    // TODO: should we write our own factors function and compare against that here?
   })
 }
 
@@ -391,7 +403,8 @@ function checkLeetspeak () {
     assert.deepStrictEqual(module.leetspeak('kewl'), 'k3wl')
     assert.deepStrictEqual(module.leetspeak('orange'), '0r4n63')
     assert.deepStrictEqual(module.leetspeak('ORANGE'), '0R4N63')
-    // TODO: add some more test cases here
+    assert.deepStrictEqual(module.leetspeak('page'), 'p463')
+    assert.deepStrictEqual(module.leetspeak('silly'), '51lly')
   })
 }
 
@@ -420,9 +433,10 @@ function checkLongLongVowels () {
   it('"longLongVowels" function', function () {
     assert.deepStrictEqual(module.longLongVowels('Good'), 'Goooood')
     assert.deepStrictEqual(module.longLongVowels('Cheese'), 'Cheeeeese')
-    assert.deepStrictEqual(module.longLongVowels('Man'), 'Man')
+    assert.deepStrictEqual(module.longLongVowels('beef'), 'beeeeef')
     assert.deepStrictEqual(module.longLongVowels(''), '')
-    // TODO: add some more test cases here
+    assert.deepStrictEqual(module.longLongVowels('Man'), 'Man')
+    assert.deepStrictEqual(module.longLongVowels('CHOCOLATE'), 'CHOCOLATE')
   })
 }
 
@@ -489,13 +503,25 @@ function checkMatrixMath () {
   })
 
   it('"matrixAdd" function', function () {
-    assert.deepStrictEqual(module.matrixAdd([[1, 3], [2, 4]], [[5, 2], [1, 0]]), [[6, 5], [3, 4]])
-    // TODO: add some more test cases here
+    assert.deepStrictEqual(module.matrixAdd([[1, 3], [2, 4]], [[5, 2], [1, 0]]),
+      [[6, 5], [3, 4]])
+    assert.deepStrictEqual(module.matrixAdd([[5, 24], [16, 91]], [[8, 46], [7, 1]]),
+      [[13, 70], [23, 92]])
+    assert.deepStrictEqual(module.matrixAdd([[0, 0], [0, 0]], [[0, 0], [0, 0]]),
+      [[0, 0], [0, 0]])
+    assert.deepStrictEqual(module.matrixAdd([[-84, 2], [-6, 4]], [[8, -42], [7, 1]]),
+      [[-76, -40], [1, 5]])
   })
 
   it('"matrixMultiply" function', function () {
-    assert.deepStrictEqual(module.matrixMultiply([[2, 4], [3, 4]], [[5, 2], [3, 1]]), [[22, 8], [27, 10]])
-    // TODO: add some more test cases here
+    assert.deepStrictEqual(module.matrixMultiply([[1, 1], [1, 1]], [[1, 1], [1, 1]]),
+      [[2, 2], [2, 2]])
+    assert.deepStrictEqual(module.matrixMultiply([[1, -1], [1, -1]], [[1, -1], [1, -1]]),
+      [[0, 0], [0, 0]])
+    assert.deepStrictEqual(module.matrixMultiply([[2, 4], [3, 4]], [[5, 2], [3, 1]]),
+      [[22, 8], [27, 10]])
+    assert.deepStrictEqual(module.matrixMultiply([[23, 4], [0, -8]], [[22, 8], [7, -75]]),
+      [[534, -116], [-56, 600]])
   })
 }
 

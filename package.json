@@ -7,10 +7,6 @@
     "type": "git",
     "url": "git://github.com/oakmac/js201-exercises.git"
   },
-  "main": "main.js",
-  "engines": {
-    "node": "*"
-  },
   "dependencies": {
     "esprima": "4.0.1",
     "glob": "7.1.3",
