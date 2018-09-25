@@ -75,16 +75,16 @@ function checkFileSyntax (f) {
   }
 
   // try parsing the JS
-  it(f + ' should be valid JavaScript syntax', function () {
-    let parsed = null
-    try {
-      parsed = esprima.parseScript(fileContents)
-    } catch (e) { }
-    if (!parsed) {
-      allSyntaxValid = false
-    }
+  let parsed = null
+  try {
+    parsed = esprima.parseScript(fileContents)
+  } catch (e) { }
+  if (!parsed) {
+    allSyntaxValid = false
+  }
 
-    assert.ok(parsed)
+  it(f + ' should be valid JavaScript syntax', function () {
+    assert.ok(parsed, f + ' has invalid syntax')
   })
 }
 
@@ -92,34 +92,46 @@ function checkJSSyntax () {
   exerciseFiles.forEach(checkFileSyntax)
 }
 
-// function checkHelloWorlds () {
-//   it('defaults', function () {
-//     assert.deepEqual(test1Expected, test1Input)
-//   })
-//
-//   it('custom delimiter', function () {
-//     assert.deepEqual(test2Expected, test2Input)
-//   })
-//
-//   it('camelCase conversion', function () {
-//     assert.deepEqual(test3Expected, test3Input)
-//   })
-//
-//   it('trim section whitespace', function () {
-//     assert.deepEqual(test4Expected, test4Input)
-//   })
-//
-//   it('all options at once', function () {
-//     assert.deepEqual(test5Expected, test5Input)
-//   })
-// }
+function isFn (f) {
+  return typeof f === 'function'
+}
+
+function checkHelloWorlds () {
+  const moduleFileName = '../' + moduleName('exercises/01-hello-world.js')
+  let module = null
+  try {
+    module = require(moduleFileName)
+  } catch (e) { }
+
+  if (!module) {
+    it('Unable to read ' + moduleFileName, function () {
+      assert.fail('Unable to read ' + moduleFileName)
+    })
+    return
+  }
+
+  it('There should be two functions: hello and helloDefault', function () {
+    assert(isFn(module.hello), 'function "hello" not found')
+    assert(isFn(module.helloDefault), 'function "helloDefault" not found')
+  })
+
+  it('test "hello" function', function () {
+    assert.deepStrictEqual(module.hello('Mustache'), 'Hello, Mustache!', "hello('Mustache') should return 'Hello, Mustache!'")
+    assert.deepStrictEqual(module.hello(''), 'Hello, !', "hello('') should return 'Hello, !'")
+  })
+
+  it('test "helloDefault" function', function () {
+    assert.deepStrictEqual(module.helloDefault('Mustache'), 'Hello, Mustache!', "helloDefault('Mustache') should return 'Hello, Mustache!'")
+    assert.deepStrictEqual(module.helloDefault(''), 'Hello, world!', "helloDefault('') should return 'Hello, world!'")
+  })
+}
 
 describe('JavaScript Syntax', checkJSSyntax)
 
 // only run the test suite if there are no syntax errors
 if (allSyntaxValid) {
   createModuleFiles()
-  // describe('Hello Worlds', checkHelloWorlds)
+  describe('Hello Worlds', checkHelloWorlds)
   // describe('Madlib', checkMadlib)
   destroyModuleFiles()
 }
