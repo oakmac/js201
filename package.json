@@ -18,6 +18,6 @@
   "scripts": {
     "test": "mocha",
     "test-min": "clear && mocha --reporter=progress --bail",
-    "watch-tests": "./node_modules/.bin/onchange 'exercises/*.js' --initial -- npm run test-min -s"
+    "watch": "./node_modules/.bin/onchange 'exercises/*.js' --initial -- npm run test-min -s"
   }
 }

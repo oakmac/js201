@@ -32,7 +32,7 @@ The goal is to get the test suite to pass all conditions. Good luck!
 You may want to run the test suite anytime a file in `exercises/` changes:
 
 ```sh
-npm run watch-tests
+npm run watch
 ```
 
 This command will continuously run the test suite and stop on the first failing
