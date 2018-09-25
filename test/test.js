@@ -357,11 +357,11 @@ function checkMakeBoxes () {
   })
 
   it('"makeSquare" function', function () {
-    assert.deepStrictEqual(module.makeSquare(0), '')
-    assert.deepStrictEqual(module.makeSquare(1), '*')
-    assert.deepStrictEqual(module.makeSquare(2), '**\n**')
-    assert.deepStrictEqual(module.makeSquare(3), '***\n***\n***')
-    assert.deepStrictEqual(module.makeSquare(5), '*****\n*****\n*****\n*****\n*****')
+    assert.deepStrictEqual(module.makeSquare(0), '', "makeSquare(0) should return '' -- an empty string")
+    assert.deepStrictEqual(module.makeSquare(1), '*', "makeSquare(1) should return '*'")
+    assert.deepStrictEqual(module.makeSquare(2), '**\n**', "makeSquare(2) should return '**\n**' -- 2 lines of **")
+    assert.deepStrictEqual(module.makeSquare(3), '***\n***\n***', "makeSquare(3) should return '***\n***\n***' -- 3 lines of ***")
+    assert.deepStrictEqual(module.makeSquare(5), '*****\n*****\n*****\n*****\n*****', "makeSquare(4) should return '*****\n*****\n*****\n*****\n*****' -- 4 lines of ****")
   })
 
   it('"makeBox" function', function () {
