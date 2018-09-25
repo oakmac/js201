@@ -289,6 +289,122 @@ function checkNumberJoiners () {
 }
 
 // -----------------------------------------------------------------------------
+// Factors
+// -----------------------------------------------------------------------------
+
+function checkFactors () {
+  const moduleFileName = '../' + moduleName('exercises/06-factors.js')
+  let module = null
+  try {
+    module = require(moduleFileName)
+  } catch (e) { }
+
+  if (!module) {
+    it('Unable to read ' + moduleFileName, function () {
+      assert.fail('Unable to read ' + moduleFileName)
+    })
+    return
+  }
+
+  it('06-factors.js should have a "factors" function', function () {
+    assert(isFn(module.factors), 'function "factors" not found')
+  })
+
+  it('"factors" function', function () {
+    assert.deepStrictEqual(module.factors(1), [1], 'factors(1) should return [1]')
+    assert.deepStrictEqual(module.factors(12), [1, 2, 3, 4, 6, 12], 'factors(12) should return [1, 2, 3, 4, 6, 12]')
+    assert.deepStrictEqual(module.factors(37), [1, 37], 'factors(37) should return [1, 37]')
+    assert.deepStrictEqual(module.factors(48), [1, 2, 3, 4, 6, 8, 12, 16, 24, 48], 'factors(48) should return [1, 2, 3, 4, 6, 8, 12, 16, 24, 48]')
+    assert.deepStrictEqual(module.factors(96), [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 96], 'factors(96) should return [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 96]')
+    // TODO: should we write our own factors function and compare against that here?
+  })
+}
+
+// -----------------------------------------------------------------------------
+// Rock Paper Scissors
+// -----------------------------------------------------------------------------
+
+function checkRockPaperScissors () {
+  const moduleFileName = '../' + moduleName('exercises/12-rock-paper-scissors.js')
+  let module = null
+  try {
+    module = require(moduleFileName)
+  } catch (e) { }
+
+  if (!module) {
+    it('Unable to read ' + moduleFileName, function () {
+      assert.fail('Unable to read ' + moduleFileName)
+    })
+    return
+  }
+
+  it('12-rock-paper-scissors.js should have a "rockPaperScissors" function', function () {
+    assert(isFn(module.rockPaperScissors), 'function "rockPaperScissors" not found')
+  })
+
+  it('"rockPaperScissors" function', function () {
+    assert.deepStrictEqual(module.rockPaperScissors('rock', 'scissors'), 'player 1')
+    assert.deepStrictEqual(module.rockPaperScissors('rock', 'paper'), 'player 2')
+    assert.deepStrictEqual(module.rockPaperScissors('paper', 'paper'), 'draw')
+    // TODO: add some more test cases here
+  })
+}
+
+// -----------------------------------------------------------------------------
+// Tic Tac Toe
+// -----------------------------------------------------------------------------
+
+const tttBoard1 = [
+  ['O', 'O', 'O'],
+  ['X', null, 'X'],
+  [null, 'X', null]
+]
+
+const tttBoard2 = [
+  ['O', 'X', 'O'],
+  ['O', 'X', null],
+  [null, 'X', null]
+]
+
+const tttBoard3 = [
+  ['O', 'X', 'O'],
+  ['O', 'O', null],
+  [null, 'X', 'X']
+]
+
+const tttBoard4 = [
+  ['O', null, 'X'],
+  ['O', 'X', null],
+  ['X', 'O', 'X']
+]
+
+function checkTicTacToe () {
+  const moduleFileName = '../' + moduleName('exercises/13-tic-tac-toe.js')
+  let module = null
+  try {
+    module = require(moduleFileName)
+  } catch (e) { }
+
+  if (!module) {
+    it('Unable to read ' + moduleFileName, function () {
+      assert.fail('Unable to read ' + moduleFileName)
+    })
+    return
+  }
+
+  it('13-tic-tac-toe.js should have a "ticTacToe" function', function () {
+    assert(isFn(module.ticTacToe), 'function "ticTacToe" not found')
+  })
+
+  it('"ticTacToe" function', function () {
+    assert.deepStrictEqual(module.ticTacToe(tttBoard1), 'O')
+    assert.deepStrictEqual(module.ticTacToe(tttBoard2), 'X')
+    assert.deepStrictEqual(module.ticTacToe(tttBoard3), null)
+    assert.deepStrictEqual(module.ticTacToe(tttBoard4), 'X')
+  })
+}
+
+// -----------------------------------------------------------------------------
 // Run the tests
 // -----------------------------------------------------------------------------
 
@@ -301,5 +417,13 @@ if (allSyntaxValid) {
   describe('Madlib', checkMadlib)
   describe('Tip Calculator', checkTipCalculator)
   describe('Number Joiners', checkNumberJoiners)
+  // TODO: figure out how to check these
+  // describe('Box Printers', checkBoxPrinters)
+  describe('Factors', checkFactors)
+  // TODO: test caesar cipher
+  // TODO: test leetspeak
+  // TODO: test long-long vowels
+  describe('Rock Paper Scissors', checkRockPaperScissors)
+  describe('Tic Tac Toe', checkTicTacToe)
   destroyModuleFiles()
 }
