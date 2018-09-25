@@ -47,7 +47,7 @@ function getTopLevelFunctions (syntaxTree) {
 // example filename --> module filename
 function moduleName (f) {
   return f.replace('exercises/', modulesDir)
-          .replace('.js', '.module.js')
+    .replace('.js', '.module.js')
 }
 
 function moduleExportStatement (fnName) {
