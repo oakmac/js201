@@ -3,6 +3,7 @@
   "name": "js201",
   "description": "Programming exercises for a beginning JavaScript programmer.",
   "version": "1.0.0",
+  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "git://github.com/oakmac/js201-exercises.git"
@@ -15,7 +16,7 @@
   },
   "scripts": {
     "test": "mocha",
-    "watch-tests": "./node_modules/.bin/onchange 'exercises/*.js' -- npm test"
-  },
-  "license": "ISC"
+    "test-min": "mocha --reporter=min --bail",
+    "watch-tests": "./node_modules/.bin/onchange 'exercises/*.js' --initial -- npm run test-min -s"
+  }
 }

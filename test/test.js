@@ -122,11 +122,11 @@ function checkFileSyntax (f) {
   } catch (e) { }
   if (!parsed) {
     allSyntaxValid = false
-  }
 
-  it(f + ' should be valid JavaScript syntax', function () {
-    assert.ok(parsed, f + ' has invalid syntax')
-  })
+    it(f + ' should be valid JavaScript syntax', function () {
+      assert.ok(parsed, f + ' has invalid syntax')
+    })
+  }
 }
 
 function checkJSSyntax () {
