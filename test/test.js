@@ -31,7 +31,7 @@ let allSyntaxValid = true
 // Module Magic
 // -----------------------------------------------------------------------------
 
-// returns an array of the top-level function names in an example script
+// returns an array of the top-level function names from a script
 function getTopLevelFunctions (syntaxTree) {
   let fnNames = []
   for (let i = 0; i < syntaxTree.body.length; i++) {
@@ -79,6 +79,29 @@ function destroyModuleFiles () {
 // -----------------------------------------------------------------------------
 // Check JS Syntax
 // -----------------------------------------------------------------------------
+
+// returns the "body" part of fnName
+// NOTE: assumes that fnName is a top-level function
+function getFnBody (body, fnName) {
+  for (let i = 0; i < body.length; i++) {
+    if (body[i].type === 'FunctionDeclaration' &&
+        body[i].id.name === fnName) {
+      return body[i].body
+    }
+  }
+
+  return false
+}
+
+// does "fnName" contain "expressionType"?
+function functionContainStatement (syntaxTree, fnName, expressionType) {
+  const fnBodyStatements = getFnBody(syntaxTree, fnName)
+  if (!fnBodyStatements) return false
+
+  // NOTE: this is a total hack, but works fine for this use case
+  const json = JSON.stringify(fnBodyStatements)
+  return json.includes('"type":"' + expressionType + '"')
+}
 
 function checkFileSyntax (f) {
   const fileContents = fs.readFileSync(f, utf8)
@@ -247,6 +270,9 @@ function checkNumberJoiners () {
     return
   }
 
+  const fileContents = fs.readFileSync('exercises/04-number-joiners.js', utf8)
+  const syntaxTree = esprima.parseScript(fileContents)
+
   it('04-number-joiners.js should have three functions: "numberJoinerWhile", "numberJoinerFor", "numberJoinerFancy"', function () {
     assert(isFn(module.numberJoinerWhile), 'function "numberJoinerWhile" not found')
     assert(isFn(module.numberJoinerFor), 'function "numberJoinerFor" not found')
@@ -254,7 +280,8 @@ function checkNumberJoiners () {
   })
 
   it('"numberJoinerWhile" function', function () {
-    // TODO: parse the JS here and make sure they used a "while" loop
+    assert.ok(functionContainStatement(syntaxTree.body, 'numberJoinerWhile', 'WhileStatement'),
+      '"numberJoinerWhile" should contain a "while" statement')
     assert.deepStrictEqual(module.numberJoinerWhile(1, 1), '1',
       "numberJoinerWhile(1, 1) should return '1'")
     assert.deepStrictEqual(module.numberJoinerWhile(1, 10), '1_2_3_4_5_6_7_8_9_10',
@@ -266,7 +293,8 @@ function checkNumberJoiners () {
   })
 
   it('"numberJoinerFor" function', function () {
-    // TODO: parse the JS here and make sure they used a "for" loop
+    assert.ok(functionContainStatement(syntaxTree.body, 'numberJoinerFor', 'ForStatement'),
+      '"numberJoinerFor" should contain a "for" statement')
     assert.deepStrictEqual(module.numberJoinerFor(1, 1), '1',
       "numberJoinerFor(1, 1) should return '1'")
     assert.deepStrictEqual(module.numberJoinerFor(1, 10), '1_2_3_4_5_6_7_8_9_10',
