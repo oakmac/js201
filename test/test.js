@@ -321,6 +321,109 @@ function checkFactors () {
 }
 
 // -----------------------------------------------------------------------------
+// Leetspeak
+// -----------------------------------------------------------------------------
+
+function checkLeetspeak () {
+  const moduleFileName = '../' + moduleName('exercises/08-leetspeak.js')
+  let module = null
+  try {
+    module = require(moduleFileName)
+  } catch (e) { }
+
+  if (!module) {
+    it('Unable to read ' + moduleFileName, function () {
+      assert.fail('Unable to read ' + moduleFileName)
+    })
+    return
+  }
+
+  it('08-leetspeak.js should have a "leetspeak" function', function () {
+    assert(isFn(module.leetspeak), 'function "leetspeak" not found')
+  })
+
+  it('"leetspeak" function', function () {
+    assert.deepStrictEqual(module.leetspeak('Leet'), 'l337')
+    assert.deepStrictEqual(module.leetspeak(''), '')
+    assert.deepStrictEqual(module.leetspeak('banana'), 'b4n4n4')
+    assert.deepStrictEqual(module.leetspeak('kewl'), 'k3wl')
+    assert.deepStrictEqual(module.leetspeak('orange'), '0r4n63')
+    assert.deepStrictEqual(module.leetspeak('ORANGE'), '0R4N63')
+    // TODO: add some more test cases here
+  })
+}
+
+// -----------------------------------------------------------------------------
+// Long-long Vowels
+// -----------------------------------------------------------------------------
+
+function checkLongLongVowels () {
+  const moduleFileName = '../' + moduleName('exercises/09-long-long-vowels.js')
+  let module = null
+  try {
+    module = require(moduleFileName)
+  } catch (e) { }
+
+  if (!module) {
+    it('Unable to read ' + moduleFileName, function () {
+      assert.fail('Unable to read ' + moduleFileName)
+    })
+    return
+  }
+
+  it('09-long-long-vowels.js should have a "longLongVowels" function', function () {
+    assert(isFn(module.longLongVowels), 'function "longLongVowels" not found')
+  })
+
+  it('"longLongVowels" function', function () {
+    assert.deepStrictEqual(module.longLongVowels('Good'), 'Goooood')
+    assert.deepStrictEqual(module.longLongVowels('Cheese'), 'Cheeeeese')
+    assert.deepStrictEqual(module.longLongVowels('Man'), 'Man')
+    assert.deepStrictEqual(module.longLongVowels(''), '')
+    // TODO: add some more test cases here
+  })
+}
+
+// -----------------------------------------------------------------------------
+// Number Arrays
+// -----------------------------------------------------------------------------
+
+function checkNumberArrays () {
+  const moduleFileName = '../' + moduleName('exercises/10-number-arrays.js')
+  let module = null
+  try {
+    module = require(moduleFileName)
+  } catch (e) { }
+
+  if (!module) {
+    it('Unable to read ' + moduleFileName, function () {
+      assert.fail('Unable to read ' + moduleFileName)
+    })
+    return
+  }
+
+  it('10-number-arrays.js should have two functions: "sumNumbers" and "positiveNumbers"', function () {
+    assert(isFn(module.sumNumbers), 'function "sumNumbers" not found')
+    assert(isFn(module.positiveNumbers), 'function "positiveNumbers" not found')
+  })
+
+  it('"sumNumbers" function', function () {
+    assert.deepStrictEqual(module.sumNumbers([]), 0)
+    assert.deepStrictEqual(module.sumNumbers([88]), 88)
+    assert.deepStrictEqual(module.sumNumbers([1, 4, 8]), 13)
+    assert.deepStrictEqual(module.sumNumbers([1, 4, 8, 1, 4, 8, 1, 4, 8]), 39)
+  })
+
+  it('"positiveNumbers" function', function () {
+    assert.deepStrictEqual(module.positiveNumbers([]), [])
+    assert.deepStrictEqual(module.positiveNumbers([1, -3, 5, -3, 0]), [1, 5, 0])
+    assert.deepStrictEqual(module.positiveNumbers([1, 2, 3]), [1, 2, 3])
+    assert.deepStrictEqual(module.positiveNumbers([-1, -4, -8]), [])
+    assert.deepStrictEqual(module.positiveNumbers([-1, -4, -8, 8]), [8])
+  })
+}
+
+// -----------------------------------------------------------------------------
 // Rock Paper Scissors
 // -----------------------------------------------------------------------------
 
@@ -421,8 +524,10 @@ if (allSyntaxValid) {
   // describe('Box Printers', checkBoxPrinters)
   describe('Factors', checkFactors)
   // TODO: test caesar cipher
-  // TODO: test leetspeak
-  // TODO: test long-long vowels
+  describe('Leetspeak', checkLeetspeak)
+  describe('Long-long Vowels', checkLongLongVowels)
+  describe('Number Arrays', checkNumberArrays)
+  // TODO: matrix math
   describe('Rock Paper Scissors', checkRockPaperScissors)
   describe('Tic Tac Toe', checkTicTacToe)
   destroyModuleFiles()
