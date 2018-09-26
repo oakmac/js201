@@ -4,7 +4,7 @@
 // Based on:
 // good --> 20%
 // fair --> 15%
-// bad --> 10%
+// poor --> 10%
 //
 // Examples:
 // tipAmount(100, 'good') --> 20
