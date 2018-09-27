@@ -44,4 +44,3 @@ test.
 
 [Node.js]:https://nodejs.org/
 [npm]:https://en.wikipedia.org/wiki/Npm_(software)
-[which]:https://en.wikipedia.org/wiki/Which_(Unix)
