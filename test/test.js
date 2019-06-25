@@ -142,12 +142,29 @@ function isFn (f) {
   return typeof f === 'function'
 }
 
+function getModule (f) {
+  let module
+  try {
+    module = require(f)
+  } catch (e) {
+    return null
+  }
+
+  if (!module) {
+    it('Unable to read ' + f, function () {
+      assert.fail('Unable to read ' + f)
+    })
+  }
+
+  return module
+}
+
 // -----------------------------------------------------------------------------
 // Hello World
 // -----------------------------------------------------------------------------
 
 function checkHelloWorlds () {
-  const moduleFileName = '../' + moduleName('exercises/01-hello-world.js')
+  const moduleFileName = '../' + moduleName('exercises/201-hello-world.js')
   let module = null
   try {
     module = require(moduleFileName)
@@ -160,7 +177,7 @@ function checkHelloWorlds () {
     return
   }
 
-  it('01-hello-world.js should have two functions: hello and helloDefault', function () {
+  it('201-hello-world.js should have two functions: hello and helloDefault', function () {
     assert(isFn(module.hello), 'function "hello" not found')
     assert(isFn(module.helloDefault), 'function "helloDefault" not found')
   })
@@ -181,7 +198,7 @@ function checkHelloWorlds () {
 // -----------------------------------------------------------------------------
 
 function checkMadlib () {
-  const moduleFileName = '../' + moduleName('exercises/02-madlib.js')
+  const moduleFileName = '../' + moduleName('exercises/202-madlib.js')
   let module = null
   try {
     module = require(moduleFileName)
@@ -194,7 +211,7 @@ function checkMadlib () {
     return
   }
 
-  it('02-madlibs.js should have a "madlib" function', function () {
+  it('202-madlib.js should have a "madlib" function', function () {
     assert(isFn(module.madlib), 'function "madlib" not found')
   })
 
@@ -215,7 +232,7 @@ function checkMadlib () {
 // -----------------------------------------------------------------------------
 
 function checkTipCalculator () {
-  const moduleFileName = '../' + moduleName('exercises/03-tip-calculator.js')
+  const moduleFileName = '../' + moduleName('exercises/205-tip-calculator.js')
   let module = null
   try {
     module = require(moduleFileName)
@@ -228,7 +245,7 @@ function checkTipCalculator () {
     return
   }
 
-  it('03-tip-calculator.js should have three functions: "tipAmount", "totalAmount", "splitAmount"', function () {
+  it('205-tip-calculator.js should have three functions: "tipAmount", "totalAmount", "splitAmount"', function () {
     assert(isFn(module.tipAmount), 'function "tipAmount" not found')
     assert(isFn(module.totalAmount), 'function "totalAmount" not found')
     assert(isFn(module.splitAmount), 'function "splitAmount" not found')
@@ -254,11 +271,74 @@ function checkTipCalculator () {
 }
 
 // -----------------------------------------------------------------------------
-// Number Joiners
+// 01 Predicate Functions
+// -----------------------------------------------------------------------------
+
+function checkPredicateFunctions () {
+  const moduleFileName = '../' + moduleName('exercises/208-predicate-functions.js')
+  let module = getModule(moduleFileName)
+
+  it('208-predicate-functions.js should have four functions: isVowel, isEven, isOdd, isCapitalCity', function () {
+    assert(isFn(module.isVowel), 'function "isVowel" not found')
+    assert(isFn(module.isEven), 'function "isEven" not found')
+    assert(isFn(module.isOdd), 'function "isOdd" not found')
+    assert(isFn(module.isCapitalCity), 'function "isCapitalCity" not found')
+  })
+
+  it('"isVowel" function', function () {
+    assert.deepStrictEqual(module.isVowel('c'), false, "isVowel('c') should return false")
+    assert.deepStrictEqual(module.isVowel('a'), true, "isVowel('a') should return true ")
+    assert.deepStrictEqual(module.isVowel(99), false, 'isVowel(99) should return false')
+    assert.deepStrictEqual(module.isVowel('A'), true, "isVowel('A') should return true ")
+  })
+
+  it('"isEven" function', function () {
+    assert.deepStrictEqual(module.isEven(2), true, 'isEven(2) should return true')
+    assert.deepStrictEqual(module.isEven(-2), true, 'isEven(-2) should return true')
+    assert.deepStrictEqual(module.isEven(99), false, 'isEven(99) should return false')
+    assert.deepStrictEqual(module.isEven(1000), true, 'isEven(1000) should return true')
+    assert.deepStrictEqual(module.isEven('banana'), false, "isEven('banana) should return false")
+  })
+
+  it('"isOdd" function', function () {
+    assert.deepStrictEqual(module.isOdd(3), true, 'isOdd(3) should return true')
+    assert.deepStrictEqual(module.isOdd(-3), true, 'isOdd(-3) should return true')
+    assert.deepStrictEqual(module.isOdd(100), false, 'isOdd(100) should return false')
+    assert.deepStrictEqual(module.isOdd(3.14), false, 'isOdd(3.14) should return false')
+  })
+
+  it('"isCapitalCity" function', function () {
+    assert.deepStrictEqual(module.isCapitalCity('Texas', 'Austin'), true, "isCapitalCity('Texas', 'Austin') should return true")
+    assert.deepStrictEqual(module.isCapitalCity('Texas', 'Houston'), false, "isCapitalCity('Texas', 'Houston') should return false")
+    assert.deepStrictEqual(module.isCapitalCity('Alaska', 'Juneau'), true, "isCapitalCity('Alaska', 'Juneau') should return false")
+    assert.deepStrictEqual(module.isCapitalCity('Strawberry', 'Mango'), false, "isCapitalCity('Strawberry', 'Mango') should return false")
+  })
+}
+
+// -----------------------------------------------------------------------------
+// 210 - Fizzbuzz
+// -----------------------------------------------------------------------------
+
+function checkFizzbuzz () {
+  const moduleFileName = '../' + moduleName('exercises/210-fizzbuzz.js')
+  let module = getModule(moduleFileName)
+
+  it('210-fizzbuzz.js should have one function: fizzbuzz', function () {
+    assert(isFn(module.fizzbuzz), 'function "fizzbuzz" not found')
+  })
+
+  it('"fizzbuzz" function', function () {
+    assert.deepStrictEqual(module.fizzbuzz(3), '..fizz', "fizzbuzz(3) should return '..fizz'")
+    assert.deepStrictEqual(module.fizzbuzz(15), '..fizz.buzzfizz..fizzbuzz.fizz..fizzbuzz', "fizzbuzz(15) should return '..fizz.buzzfizz..fizzbuzz.fizz..fizzbuzz'")
+  })
+}
+
+// -----------------------------------------------------------------------------
+// 212 - Number Joiners
 // -----------------------------------------------------------------------------
 
 function checkNumberJoiners () {
-  const moduleFileName = '../' + moduleName('exercises/04-number-joiners.js')
+  const moduleFileName = '../' + moduleName('exercises/212-number-joiners.js')
   let module = null
   try {
     module = require(moduleFileName)
@@ -271,10 +351,10 @@ function checkNumberJoiners () {
     return
   }
 
-  const fileContents = fs.readFileSync('exercises/04-number-joiners.js', utf8)
+  const fileContents = fs.readFileSync('exercises/212-number-joiners.js', utf8)
   const syntaxTree = esprima.parseScript(fileContents)
 
-  it('04-number-joiners.js should have three functions: "numberJoinerWhile", "numberJoinerFor", "numberJoinerFancy"', function () {
+  it('212-number-joiners.js should have three functions: "numberJoinerWhile", "numberJoinerFor", "numberJoinerFancy"', function () {
     assert(isFn(module.numberJoinerWhile), 'function "numberJoinerWhile" not found')
     assert(isFn(module.numberJoinerFor), 'function "numberJoinerFor" not found')
     assert(isFn(module.numberJoinerFancy), 'function "numberJoinerFancy" not found')
@@ -333,11 +413,59 @@ function checkNumberJoiners () {
 }
 
 // -----------------------------------------------------------------------------
-// Make Boxes
+// 214 - Loopy Strings
 // -----------------------------------------------------------------------------
 
-function checkMakeBoxes () {
-  const moduleFileName = '../' + moduleName('exercises/05-make-boxes.js')
+function checkLoopyStrings () {
+  const moduleFileName = '../' + moduleName('exercises/214-loopy-strings.js')
+  let module = getModule(moduleFileName)
+
+  it('214-loopy-strings.js should have five functions: reverse, findLongestWord, nicer, capitalizeAll, and split', function () {
+    assert(isFn(module.reverse), 'function "reverse" not found')
+    assert(isFn(module.findLongestWord), 'function "findLongestWord" not found')
+    assert(isFn(module.nicer), 'function "nicer" not found')
+    assert(isFn(module.capitalizeAll), 'function "capitalizeAll" not found')
+    assert(isFn(module.split), 'function "split" not found')
+  })
+
+  it('"reverse" function', function () {
+    assert.deepStrictEqual(module.reverse('skoob'), 'books', "reverse('skoob') should return 'books'")
+    assert.deepStrictEqual(module.reverse('1234'), '4321', "reverse('1234') should return '4321'")
+    assert.deepStrictEqual(module.reverse('blah blah'), 'halb halb', "reverse('blah blah') should return 'halb halb'")
+  })
+
+  it('"findLongestWord" function', function () {
+    assert.deepStrictEqual(module.findLongestWord('a book full of dogs'), 'book', "findLongestWord('a book full of dogs') should return 'book")
+    assert.deepStrictEqual(module.findLongestWord('abrakadabra is the longest word here'),
+      'abrakadabra', "findLongestWord('abrakadabra is the longest word here') should return 'abrakadabra'")
+    assert.deepStrictEqual(module.findLongestWord('word'), 'word', "findLongestWord('word') should return 'word'")
+  })
+
+  it('"nicer" function', function () {
+    assert.deepStrictEqual(module.nicer('mom get the heck in here and bring me a darn sandwich.'),
+      'mom get the in here and bring me a sandwich.', "nicer('mom get the heck in here and bring me a darn sandwich.') should return 'mom get the in here and bring me a sandwich.'")
+    assert.deepStrictEqual(module.nicer('only nice things'), 'only nice things', "module.nicer('only nice things') should return 'only nice things")
+    assert.deepStrictEqual(module.nicer('a crappy thing'), 'a thing', "nicer('a crappy thing') should return 'a thing")
+  })
+
+  it('"capitalizeAll" function', function () {
+    assert.deepStrictEqual(module.capitalizeAll('hello world'), 'Hello World', "capitalizeAll('hello world') should return 'Hello World'")
+    assert.deepStrictEqual(module.capitalizeAll('a'), 'A', "capitalizeAll('a') should return 'A'")
+  })
+
+  it('"split" function', function () {
+    assert.deepStrictEqual(module.split('a-b-c', '-'), ['a', 'b', 'c'], "split('a-b-c', '-') should return['a', 'b', 'c'] ")
+    assert.deepStrictEqual(module.split('APPLExxBANANAxxCHERRY', 'xx'), ['APPLE', 'BANANA', 'CHERRY'], "split('APPLExxBANANAxxCHERRY', 'xx') should return ['APPLE', 'BANANA', 'CHERRY']")
+    assert.deepStrictEqual(module.split('xyz', 'r'), ['xyz'], "split('xyz', 'r') should return ['xyz']")
+  })
+}
+
+// -----------------------------------------------------------------------------
+// 218 - Factors
+// -----------------------------------------------------------------------------
+
+function checkFactors () {
+  const moduleFileName = '../' + moduleName('exercises/218-factors.js')
   let module = null
   try {
     module = require(moduleFileName)
@@ -350,7 +478,316 @@ function checkMakeBoxes () {
     return
   }
 
-  it('05-make-boxes.js should have three functions: "makeSquare", "makeBox", and "makeBanner"', function () {
+  it('218-factors.js should have a "gcd" function', function () {
+    assert(isFn(module.gcd), 'function "gcd" not found')
+  })
+
+  it('"gcd" function', function () {
+    assert.deepStrictEqual(module.gcd(5, 1), 1, 'gcd(5, 1) should return 1')
+    assert.deepStrictEqual(module.gcd(3, 15), 3, 'gcd(3, 15) should return 3')
+    assert.deepStrictEqual(module.gcd(50, 20), 10, 'gcd(50, 20) should return 10')
+  })
+
+  it('218-factors.js should have a "factors" function', function () {
+    assert(isFn(module.factors), 'function "factors" not found')
+  })
+
+  it('"factors" function', function () {
+    assert.deepStrictEqual(module.factors(1), [1], 'factors(1) should return [1]')
+    assert.deepStrictEqual(module.factors(12), [1, 2, 3, 4, 6, 12], 'factors(12) should return [1, 2, 3, 4, 6, 12]')
+    assert.deepStrictEqual(module.factors(37), [1, 37], 'factors(37) should return [1, 37]')
+    assert.deepStrictEqual(module.factors(48), [1, 2, 3, 4, 6, 8, 12, 16, 24, 48], 'factors(48) should return [1, 2, 3, 4, 6, 8, 12, 16, 24, 48]')
+    assert.deepStrictEqual(module.factors(96), [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 96], 'factors(96) should return [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 96]')
+  })
+}
+
+// -----------------------------------------------------------------------------
+// 220 - Cities
+// -----------------------------------------------------------------------------
+
+function checkCities () {
+  const moduleFileName = '../' + moduleName('exercises/220-cities.js')
+  let module = getModule(moduleFileName)
+
+  it('220-cities.js should have two functions: coolCities, cityNames', function () {
+    assert(isFn(module.coolCities), 'function "coolCities" not found')
+    assert(isFn(module.cityNames), 'function "cityNames" not found')
+  })
+
+  it('"coolCities" function', function () {
+    assert.deepStrictEqual(module.coolCities([
+      { name: 'Los Angeles', temperature: 60.0 },
+      { name: 'Atlanta', temperature: 52.0 },
+      { name: 'Detroit', temperature: 48.0 },
+      { name: 'New York', temperature: 80.0 }
+    ]), [
+      { name: 'Los Angeles', temperature: 60.0 },
+      { name: 'Atlanta', temperature: 52.0 },
+      { name: 'Detroit', temperature: 48.0 }
+    ], 'coolCities([\n' +
+      "      { name: 'Los Angeles', temperature: 60.0},\n" +
+      "      { name: 'Atlanta', temperature: 52.0 },\n" +
+      "      { name: 'Detroit', temperature: 48.0 },\n" +
+      "      { name: 'New York', temperature: 80.0 }\n" +
+      '    ] should return [\n' +
+      "      { name: 'Los Angeles', temperature: 60.0},\n" +
+      "      { name: 'Atlanta', temperature: 52.0 },\n" +
+      "      { name: 'Detroit', temperature: 48.0 }\n" +
+      '    ]')
+  })
+
+  it('"cityNames" function', function () {
+    assert.deepStrictEqual(module.cityNames([
+      { name: 'Los Angeles', temperature: 60.0 },
+      { name: 'Atlanta', temperature: 52.0 },
+      { name: 'Detroit', temperature: 48.0 },
+      { name: 'New York', temperature: 80.0 }
+    ]), [
+      'Los Angeles',
+      'Atlanta',
+      'Detroit',
+      'New York'
+    ], 'coolCities([\n' +
+      "      { name: 'Los Angeles', temperature: 60.0},\n" +
+      "      { name: 'Atlanta', temperature: 52.0 },\n" +
+      "      { name: 'Detroit', temperature: 48.0 },\n" +
+      "      { name: 'New York', temperature: 80.0 }\n" +
+      '    ]) should return [\n' +
+      "      'Los Angeles',\n" +
+      "      'Atlanta',\n" +
+      "      'Detroit'\n" +
+      "       'New York'\n" +
+      '    ]')
+  })
+}
+
+// -----------------------------------------------------------------------------
+// 230 - Long-long Vowels
+// -----------------------------------------------------------------------------
+
+function checkLongLongVowels () {
+  const moduleFileName = '../' + moduleName('exercises/230-long-long-vowels.js')
+  let module = null
+  try {
+    module = require(moduleFileName)
+  } catch (e) { }
+
+  if (!module) {
+    it('Unable to read ' + moduleFileName, function () {
+      assert.fail('Unable to read ' + moduleFileName)
+    })
+    return
+  }
+
+  it('230-long-long-vowels.js should have a "longLongVowels" function', function () {
+    assert(isFn(module.longLongVowels), 'function "longLongVowels" not found')
+  })
+
+  it('"longLongVowels" function', function () {
+    assert.deepStrictEqual(module.longLongVowels('Good'), 'Goooood')
+    assert.deepStrictEqual(module.longLongVowels('Cheese'), 'Cheeeeese')
+    assert.deepStrictEqual(module.longLongVowels('beef'), 'beeeeef')
+    assert.deepStrictEqual(module.longLongVowels(''), '')
+    assert.deepStrictEqual(module.longLongVowels('Man'), 'Man')
+    assert.deepStrictEqual(module.longLongVowels('CHOCOLATE'), 'CHOCOLATE')
+  })
+}
+
+// -----------------------------------------------------------------------------
+// 216 - Number Arrays
+// -----------------------------------------------------------------------------
+
+function checkNumberArrays () {
+  const moduleFileName = '../' + moduleName('exercises/216-number-arrays.js')
+  let module = getModule(moduleFileName)
+
+  it('216-number-arrays.js should have seven functions: max, sumNumbers, positives, evens, odds, integers, squareDance', function () {
+    assert(isFn(module.max), 'function "max" not found')
+    assert(isFn(module.sumNumbers), 'function "sumNumbers" not found')
+    assert(isFn(module.positives), 'function "positives" not found')
+    assert(isFn(module.evens), 'function "evens" not found')
+    assert(isFn(module.odds), 'function "odds" not found')
+    assert(isFn(module.integers), 'function "integers" not found')
+    assert(isFn(module.squareDance), 'function "squareDance" not found')
+  })
+
+  it('"max" function', function () {
+    assert.deepStrictEqual(module.max([1, 2, 3, 4, 5]), 5, 'max([1,2,3,4,5]) should return 5')
+    assert.deepStrictEqual(module.max([-1000, 20, 32, 0]), 32, 'max([-1000,20,32,0]) should return 32')
+    assert.deepStrictEqual(module.max([]), 0, 'max([]) should return 0')
+  })
+
+  it('"sumNumbers" function', function () {
+    assert.deepStrictEqual(module.sumNumbers([]), 0)
+    assert.deepStrictEqual(module.sumNumbers([88]), 88)
+    assert.deepStrictEqual(module.sumNumbers([1, 4, 8]), 13)
+    assert.deepStrictEqual(module.sumNumbers([1, 4, 8, 1, 4, 8, 1, 4, 8]), 39)
+  })
+
+  it('"positives" function', function () {
+    assert.deepStrictEqual(module.positives([-1, -2, -3, 4, 5]), [4, 5], 'positives([-1,-2,-3,4,5]) should return [4,5]')
+    assert.deepStrictEqual(module.positives([-1, -2, -3, -4, -5]), [], 'positives([-1,-2,-3,-4,-5]) should return []')
+    assert.deepStrictEqual(module.positives([-1, -2, -3, 0, 1000]), [1000], 'positives([-1,-2,-3,0,1000]) should return [1000]')
+    assert.deepStrictEqual(module.positives([]), [])
+    assert.deepStrictEqual(module.positives([1, -3, 5, -3, 0]), [1, 5, 0])
+    assert.deepStrictEqual(module.positives([1, 2, 3]), [1, 2, 3])
+    assert.deepStrictEqual(module.positives([-1, -4, -8]), [])
+    assert.deepStrictEqual(module.positives([-1, -4, -8, 8]), [8])
+  })
+
+  it('"evens" function', function () {
+    assert.deepStrictEqual(module.evens([1, 2, 3, 4, 5]), [2, 4], 'evens([1,2,3,4,5]) should return [2,4]')
+    assert.deepStrictEqual(module.evens([2, 4, 6, 7, 8]), [2, 4, 6, 8], 'evens([2,4,6,7,8]) should return [2,4,6,8]')
+    assert.deepStrictEqual(module.evens([-2, -4, -6, -7, -8]), [-2, -4, -6, -8], 'evens([-2,-4,-6,-7,-8]) should return [-2,-4,-6,-8]')
+  })
+
+  it('"odds" function', function () {
+    assert.deepStrictEqual(module.odds([1, 2, 3, 4, 5]), [1, 3, 5], 'odds([1,2,3,4,5]) should return [1,3,5]')
+    assert.deepStrictEqual(module.odds([2, 4, 6, 7, 8]), [7], 'odds([2,4,6,7,8]) should return [7]')
+    assert.deepStrictEqual(module.odds([-2, -4, -6, -7, -8]), [-7], 'odds([-2,-4,-6,-7,-8]) should return [-7]')
+  })
+
+  it('"integers" function', function () {
+    assert.deepStrictEqual(module.integers([3.14, 2.4, 7, 8.1, 2]), [7, 2], 'integers([3.14, 2.4, 7, 8.1, 2]) should return [7, 2]')
+    assert.deepStrictEqual(module.integers([3.14, 2.4, -7, 8.1, -2]), [-7, -2], 'integers([3.14, 2.4, -7, 8.1, -2]) should return [-7, -2]')
+    assert.deepStrictEqual(module.integers([3.14, 2.4, 8.1, 0]), [0], 'integers([3.14, 2.4, 8.1, 0]) should return [0]')
+  })
+
+  it('"squareDance" function', function () {
+    assert.deepStrictEqual(module.squareDance([1, 2, 3]), [1, 4, 9], 'squareDance([1,2,3]) should return [1,4,9]')
+  })
+}
+
+// -----------------------------------------------------------------------------
+// 211 - Rock Paper Scissors
+// -----------------------------------------------------------------------------
+
+function checkRockPaperScissors () {
+  const moduleFileName = '../' + moduleName('exercises/211-rock-paper-scissors.js')
+  let module = null
+  try {
+    module = require(moduleFileName)
+  } catch (e) { }
+
+  if (!module) {
+    it('Unable to read ' + moduleFileName, function () {
+      assert.fail('Unable to read ' + moduleFileName)
+    })
+    return
+  }
+
+  it('211-rock-paper-scissors.js should have a "rockPaperScissors" function', function () {
+    assert(isFn(module.rockPaperScissors), 'function "rockPaperScissors" not found')
+  })
+
+  it('"rockPaperScissors" function', function () {
+    assert.deepStrictEqual(module.rockPaperScissors('rock', 'scissors'), 'player 1')
+    assert.deepStrictEqual(module.rockPaperScissors('paper', 'rock'), 'player 1')
+    assert.deepStrictEqual(module.rockPaperScissors('scissors', 'paper'), 'player 1')
+
+    assert.deepStrictEqual(module.rockPaperScissors('scissors', 'rock'), 'player 2')
+    assert.deepStrictEqual(module.rockPaperScissors('rock', 'paper'), 'player 2')
+    assert.deepStrictEqual(module.rockPaperScissors('paper', 'scissors'), 'player 2')
+
+    assert.deepStrictEqual(module.rockPaperScissors('rock', 'rock'), 'draw')
+    assert.deepStrictEqual(module.rockPaperScissors('paper', 'paper'), 'draw')
+    assert.deepStrictEqual(module.rockPaperScissors('scissors', 'scissors'), 'draw')
+  })
+}
+
+// -----------------------------------------------------------------------------
+// 235 - Leetspeak
+// -----------------------------------------------------------------------------
+
+function checkLeetspeak () {
+  const moduleFileName = '../' + moduleName('exercises/235-leetspeak.js')
+  let module = null
+  try {
+    module = require(moduleFileName)
+  } catch (e) { }
+
+  if (!module) {
+    it('Unable to read ' + moduleFileName, function () {
+      assert.fail('Unable to read ' + moduleFileName)
+    })
+    return
+  }
+
+  it('235-leetspeak.js should have a "leetspeak" function', function () {
+    assert(isFn(module.leetspeak), 'function "leetspeak" not found')
+  })
+
+  it('"leetspeak" function', function () {
+    assert.deepStrictEqual(module.leetspeak('Leet'), 'l337')
+    assert.deepStrictEqual(module.leetspeak(''), '')
+    assert.deepStrictEqual(module.leetspeak('banana'), 'b4n4n4')
+    assert.deepStrictEqual(module.leetspeak('kewl'), 'k3wl')
+    assert.deepStrictEqual(module.leetspeak('orange'), '0r4n63')
+    assert.deepStrictEqual(module.leetspeak('ORANGE'), '0R4N63')
+    assert.deepStrictEqual(module.leetspeak('page'), 'p463')
+    assert.deepStrictEqual(module.leetspeak('silly'), '51lly')
+  })
+}
+
+// -----------------------------------------------------------------------------
+// 237 - Caesar Ciphers
+// -----------------------------------------------------------------------------
+
+function checkCaesarCipher () {
+  const moduleFileName = '../' + moduleName('exercises/237-caesar-cipher.js')
+  let module = null
+  try {
+    module = require(moduleFileName)
+  } catch (e) { }
+
+  if (!module) {
+    it('Unable to read ' + moduleFileName, function () {
+      assert.fail('Unable to read ' + moduleFileName)
+    })
+    return
+  }
+
+  it('237-caesar-cipher.js should have two functions: "cipher" and "decipher"', function () {
+    assert(isFn(module.cipher), 'function "cipher" not found')
+    assert(isFn(module.decipher), 'function "decipher" not found')
+  })
+
+  it('"cipher" function', function () {
+    assert.deepStrictEqual(module.cipher('Genius without education is like silver in the mine', 5),
+      'ljsnzx bnymtzy jizhfynts nx qnpj xnqajw ns ymj rnsj')
+    assert.deepStrictEqual(module.cipher('We hold these truths to be self-evident', 8),
+      'em pwtl bpmam bzcbpa bw jm amtn-mdqlmvb')
+    assert.deepStrictEqual(module.cipher('Cryptanalysis is the art of breaking codes and ciphers.', 25),
+      'bqxoszmzkxrhr hr sgd zqs ne aqdzjhmf bncdr zmc bhogdqr.')
+  })
+
+  it('"decipher" function', function () {
+    assert.deepStrictEqual(module.decipher('cvvcem cv fcyp!', 2), 'attack at dawn!')
+    assert.deepStrictEqual(module.decipher('ehz czlod otgpcrpo ty l hzzo', 11), 'two roads diverged in a wood')
+    assert.deepStrictEqual(module.decipher('bqxoszmzkxrhr hr sgd zqs ne aqdzjhmf bncdr zmc bhogdqr.', 25),
+      'Cryptanalysis is the art of breaking codes and ciphers.')
+  })
+}
+
+// -----------------------------------------------------------------------------
+// 250 - Make Boxes
+// -----------------------------------------------------------------------------
+
+function checkMakeBoxes () {
+  const moduleFileName = '../' + moduleName('exercises/250-make-boxes.js')
+  let module = null
+  try {
+    module = require(moduleFileName)
+  } catch (e) { }
+
+  if (!module) {
+    it('Unable to read ' + moduleFileName, function () {
+      assert.fail('Unable to read ' + moduleFileName)
+    })
+    return
+  }
+
+  it('250-make-boxes.js should have three functions: "makeSquare", "makeBox", and "makeBanner"', function () {
     assert(isFn(module.makeSquare), 'function "makeSquare" not found')
     assert(isFn(module.makeBox), 'function "makeBox" not found')
     assert(isFn(module.makeBanner), 'function "makeBanner" not found')
@@ -386,187 +823,11 @@ function checkMakeBoxes () {
 }
 
 // -----------------------------------------------------------------------------
-// Factors
-// -----------------------------------------------------------------------------
-
-function checkFactors () {
-  const moduleFileName = '../' + moduleName('exercises/06-factors.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
-
-  it('06-factors.js should have a "factors" function', function () {
-    assert(isFn(module.factors), 'function "factors" not found')
-  })
-
-  it('"factors" function', function () {
-    assert.deepStrictEqual(module.factors(1), [1], 'factors(1) should return [1]')
-    assert.deepStrictEqual(module.factors(12), [1, 2, 3, 4, 6, 12], 'factors(12) should return [1, 2, 3, 4, 6, 12]')
-    assert.deepStrictEqual(module.factors(37), [1, 37], 'factors(37) should return [1, 37]')
-    assert.deepStrictEqual(module.factors(48), [1, 2, 3, 4, 6, 8, 12, 16, 24, 48], 'factors(48) should return [1, 2, 3, 4, 6, 8, 12, 16, 24, 48]')
-    assert.deepStrictEqual(module.factors(96), [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 96], 'factors(96) should return [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 96]')
-  })
-}
-
-// -----------------------------------------------------------------------------
-// Caesar Ciphers
-// -----------------------------------------------------------------------------
-
-function checkCaesarCipher () {
-  const moduleFileName = '../' + moduleName('exercises/07-caesar-cipher.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
-
-  it('07-caesar-cipher.js should have two functions: "cipher" and "decipher"', function () {
-    assert(isFn(module.cipher), 'function "cipher" not found')
-    assert(isFn(module.decipher), 'function "decipher" not found')
-  })
-
-  it('"cipher" function', function () {
-    assert.deepStrictEqual(module.cipher('Genius without education is like silver in the mine', 5),
-      'ljsnzx bnymtzy jizhfynts nx qnpj xnqajw ns ymj rnsj')
-    assert.deepStrictEqual(module.cipher('We hold these truths to be self-evident', 8),
-      'em pwtl bpmam bzcbpa bw jm amtn-mdqlmvb')
-    assert.deepStrictEqual(module.cipher('Cryptanalysis is the art of breaking codes and ciphers.', 25),
-      'bqxoszmzkxrhr hr sgd zqs ne aqdzjhmf bncdr zmc bhogdqr.')
-  })
-
-  it('"decipher" function', function () {
-    assert.deepStrictEqual(module.decipher('cvvcem cv fcyp!', 2), 'attack at dawn!')
-    assert.deepStrictEqual(module.decipher('ehz czlod otgpcrpo ty l hzzo', 11), 'two roads diverged in a wood')
-    assert.deepStrictEqual(module.decipher('bqxoszmzkxrhr hr sgd zqs ne aqdzjhmf bncdr zmc bhogdqr.', 25),
-      'Cryptanalysis is the art of breaking codes and ciphers.')
-  })
-}
-
-// -----------------------------------------------------------------------------
-// Leetspeak
-// -----------------------------------------------------------------------------
-
-function checkLeetspeak () {
-  const moduleFileName = '../' + moduleName('exercises/08-leetspeak.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
-
-  it('08-leetspeak.js should have a "leetspeak" function', function () {
-    assert(isFn(module.leetspeak), 'function "leetspeak" not found')
-  })
-
-  it('"leetspeak" function', function () {
-    assert.deepStrictEqual(module.leetspeak('Leet'), 'l337')
-    assert.deepStrictEqual(module.leetspeak(''), '')
-    assert.deepStrictEqual(module.leetspeak('banana'), 'b4n4n4')
-    assert.deepStrictEqual(module.leetspeak('kewl'), 'k3wl')
-    assert.deepStrictEqual(module.leetspeak('orange'), '0r4n63')
-    assert.deepStrictEqual(module.leetspeak('ORANGE'), '0R4N63')
-    assert.deepStrictEqual(module.leetspeak('page'), 'p463')
-    assert.deepStrictEqual(module.leetspeak('silly'), '51lly')
-  })
-}
-
-// -----------------------------------------------------------------------------
-// Long-long Vowels
-// -----------------------------------------------------------------------------
-
-function checkLongLongVowels () {
-  const moduleFileName = '../' + moduleName('exercises/09-long-long-vowels.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
-
-  it('09-long-long-vowels.js should have a "longLongVowels" function', function () {
-    assert(isFn(module.longLongVowels), 'function "longLongVowels" not found')
-  })
-
-  it('"longLongVowels" function', function () {
-    assert.deepStrictEqual(module.longLongVowels('Good'), 'Goooood')
-    assert.deepStrictEqual(module.longLongVowels('Cheese'), 'Cheeeeese')
-    assert.deepStrictEqual(module.longLongVowels('beef'), 'beeeeef')
-    assert.deepStrictEqual(module.longLongVowels(''), '')
-    assert.deepStrictEqual(module.longLongVowels('Man'), 'Man')
-    assert.deepStrictEqual(module.longLongVowels('CHOCOLATE'), 'CHOCOLATE')
-  })
-}
-
-// -----------------------------------------------------------------------------
-// Number Arrays
-// -----------------------------------------------------------------------------
-
-function checkNumberArrays () {
-  const moduleFileName = '../' + moduleName('exercises/10-number-arrays.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
-
-  it('10-number-arrays.js should have two functions: "sumNumbers" and "positiveNumbers"', function () {
-    assert(isFn(module.sumNumbers), 'function "sumNumbers" not found')
-    assert(isFn(module.positiveNumbers), 'function "positiveNumbers" not found')
-  })
-
-  it('"sumNumbers" function', function () {
-    assert.deepStrictEqual(module.sumNumbers([]), 0)
-    assert.deepStrictEqual(module.sumNumbers([88]), 88)
-    assert.deepStrictEqual(module.sumNumbers([1, 4, 8]), 13)
-    assert.deepStrictEqual(module.sumNumbers([1, 4, 8, 1, 4, 8, 1, 4, 8]), 39)
-  })
-
-  it('"positiveNumbers" function', function () {
-    assert.deepStrictEqual(module.positiveNumbers([]), [])
-    assert.deepStrictEqual(module.positiveNumbers([1, -3, 5, -3, 0]), [1, 5, 0])
-    assert.deepStrictEqual(module.positiveNumbers([1, 2, 3]), [1, 2, 3])
-    assert.deepStrictEqual(module.positiveNumbers([-1, -4, -8]), [])
-    assert.deepStrictEqual(module.positiveNumbers([-1, -4, -8, 8]), [8])
-  })
-}
-
-// -----------------------------------------------------------------------------
-// Matrix Math
+// 255 - Matrix Math
 // -----------------------------------------------------------------------------
 
 function checkMatrixMath () {
-  const moduleFileName = '../' + moduleName('exercises/11-matrix-math.js')
+  const moduleFileName = '../' + moduleName('exercises/255-matrix-math.js')
   let module = null
   try {
     module = require(moduleFileName)
@@ -579,7 +840,7 @@ function checkMatrixMath () {
     return
   }
 
-  it('11-matrix-math.js should have two functions: "matrixAdd" and "matrixMultiply"', function () {
+  it('255-matrix-math.js should have two functions: "matrixAdd" and "matrixMultiply"', function () {
     assert(isFn(module.matrixAdd), 'function "matrixAdd" not found')
     assert(isFn(module.matrixMultiply), 'function "matrixMultiply" not found')
   })
@@ -608,44 +869,7 @@ function checkMatrixMath () {
 }
 
 // -----------------------------------------------------------------------------
-// Rock Paper Scissors
-// -----------------------------------------------------------------------------
-
-function checkRockPaperScissors () {
-  const moduleFileName = '../' + moduleName('exercises/12-rock-paper-scissors.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
-
-  it('12-rock-paper-scissors.js should have a "rockPaperScissors" function', function () {
-    assert(isFn(module.rockPaperScissors), 'function "rockPaperScissors" not found')
-  })
-
-  it('"rockPaperScissors" function', function () {
-    assert.deepStrictEqual(module.rockPaperScissors('rock', 'scissors'), 'player 1')
-    assert.deepStrictEqual(module.rockPaperScissors('paper', 'rock'), 'player 1')
-    assert.deepStrictEqual(module.rockPaperScissors('scissors', 'paper'), 'player 1')
-
-    assert.deepStrictEqual(module.rockPaperScissors('scissors', 'rock'), 'player 2')
-    assert.deepStrictEqual(module.rockPaperScissors('rock', 'paper'), 'player 2')
-    assert.deepStrictEqual(module.rockPaperScissors('paper', 'scissors'), 'player 2')
-
-    assert.deepStrictEqual(module.rockPaperScissors('rock', 'rock'), 'draw')
-    assert.deepStrictEqual(module.rockPaperScissors('paper', 'paper'), 'draw')
-    assert.deepStrictEqual(module.rockPaperScissors('scissors', 'scissors'), 'draw')
-  })
-}
-
-// -----------------------------------------------------------------------------
-// Tic Tac Toe
+// 257 - Tic Tac Toe
 // -----------------------------------------------------------------------------
 
 const oWinHorizontal = [
@@ -691,7 +915,7 @@ const tttBoardDraw = [
 ]
 
 function checkTicTacToe () {
-  const moduleFileName = '../' + moduleName('exercises/13-tic-tac-toe.js')
+  const moduleFileName = '../' + moduleName('exercises/257-tic-tac-toe.js')
   let module = null
   try {
     module = require(moduleFileName)
@@ -704,7 +928,7 @@ function checkTicTacToe () {
     return
   }
 
-  it('13-tic-tac-toe.js should have a "ticTacToe" function', function () {
+  it('257-tic-tac-toe.js should have a "ticTacToe" function', function () {
     assert(isFn(module.ticTacToe), 'function "ticTacToe" not found')
   })
 
@@ -722,6 +946,122 @@ function checkTicTacToe () {
 }
 
 // -----------------------------------------------------------------------------
+// 260 - Recognize Employees
+// -----------------------------------------------------------------------------
+
+function checkRecognizeEmployees () {
+  const moduleFileName = '../' + moduleName('exercises/260-recognize-employees.js')
+  let module = getModule(moduleFileName)
+
+  it('260-recognize-employees.js should have one function: recognizeEmployees', function () {
+    assert(isFn(module.recognizeEmployees), 'function "recognizeEmployees" not found')
+  })
+
+  it('"recognizeEmployees" function', function () {
+    assert.deepStrictEqual(module.recognizeEmployees(['Susan', 'Anthony', 'Bill'], ['Bill']),
+      ['Great job, Susan!', 'Great job, Anthony!', 'Outstanding job, Bill!'],
+      "recognizeEmployees(['Susan', 'Anthony', 'Bill'], ['Bill'])" +
+      " should return ['Great job, Susan!', 'Great job, Anthony!', 'Outstanding job, Bill!']")
+
+    assert.deepStrictEqual(module.recognizeEmployees(['Susan', 'Anthony', 'Bill'], ['Bill', 'Susan']),
+      ['Outstanding job, Susan!', 'Great job, Anthony!', 'Outstanding job, Bill!'],
+      "recognizeEmployees(['Susan', 'Anthony', 'Bill'], ['Bill', 'Susan'])" +
+      " should return ['Outstanding job, Susan!', 'Great job, Anthony!', 'Outstanding job, Bill!']")
+
+    assert.deepStrictEqual(module.recognizeEmployees(['Susan', 'Anthony', 'Bill'], ['Jennifer', 'Dylan']),
+      ['Great job, Susan!', 'Great job, Anthony!', 'Great job, Bill!'],
+      "recognizeEmployees(['Susan', 'Anthony', 'Bill'], ['Jennifer', 'Dylan'])" +
+      " should return ['Great job, Susan!', 'Great job, Anthony!', 'Great job, Bill!']")
+  })
+}
+
+// -----------------------------------------------------------------------------
+// 290 - Sort arrays
+// -----------------------------------------------------------------------------
+
+function checkSortArrays () {
+  const moduleFileName = '../' + moduleName('exercises/290-sort-arrays.js')
+  let module = getModule(moduleFileName)
+
+  it('290-sort-arrays.js should have three functions: alphaSort, strLengthSort, and sumSort', function () {
+    assert(isFn(module.alphaSort), 'function "alphaSort" not found')
+    assert(isFn(module.strLengthSort), 'function "strLengthSort" not found')
+    assert(isFn(module.sumSort), 'function "sumSort" not found')
+  })
+
+  it('"alphaSort" function', function () {
+    assert.deepStrictEqual(module.alphaSort(['b', 'a', 'c']),
+      ['a', 'b', 'c'],
+      "sortingOne(['b', 'a', 'c']) should equal ['a', 'b', 'c']")
+
+    assert.deepStrictEqual(module.alphaSort(['wxy', 'wxyz', 'bac', 'cab', 'abc']),
+      ['abc', 'bac', 'cab', 'wxy', 'wxyz'],
+      "sortingOne(['wxy', 'wxyz', 'bac', 'cab', 'abc']) should equal \"abc\", \"bac\", \"cab\", \"wxy\", \"wxyz\"")
+  })
+
+  it('"strLengthSort" function', function () {
+    assert.deepStrictEqual(module.strLengthSort(['one', 'two', 'three', 'four', 'no', 'more']),
+      ['no', 'one', 'two', 'four', 'more', 'three'],
+      "sortingOne(['one', 'two', 'three', 'four', 'no', 'more']) should equal ['no', 'one', 'two', 'four', 'more', 'three']")
+  })
+
+  it('"sumSort" function', function () {
+    var arr = [
+      [1, 3, 4],
+      [2, 4, 6, 8],
+      [3, 6]
+    ]
+
+    assert.deepStrictEqual(module.sumSort(arr), [
+      [1, 3, 4],
+      [3, 6],
+      [2, 4, 6, 8]
+    ], 'sortingTwo([\n' +
+      '      [1, 3, 4],\n' +
+      '      [2, 4, 6, 8],\n' +
+      '      [3, 6]\n' +
+      '    ]), should equal [\n' +
+      '                       [1, 3, 4],\n' +
+      '                       [3, 6],\n' +
+      '                       [2, 4, 6, 8]\n' +
+      '                     ]')
+  })
+}
+
+// -----------------------------------------------------------------------------
+// 295 - call N times
+// -----------------------------------------------------------------------------
+
+function checkCallNTimes () {
+  const moduleFileName = '../' + moduleName('exercises/295-call-n-times.js')
+  let module = getModule(moduleFileName)
+
+  it('295-call-n-times.js should have one function: callNTimes', function () {
+    assert(isFn(module.callNTimes), 'function "callNTimes" not found')
+  })
+
+  let count1 = 0
+  function counter1 () {
+    count1 = count1 + 1
+  }
+
+  let count2 = 0
+  function counter2 () {
+    count2 = count2 + 1
+  }
+
+  it('"callNTimes" function', function () {
+    if (isFn(module.callNTimes)) {
+      module.callNTimes(21, counter1)
+      module.callNTimes(112, counter2)
+    }
+
+    assert.deepStrictEqual(count1, 21, '"callNTimes(21, fn)" should execute "fn" 21 times')
+    assert.deepStrictEqual(count2, 112, '"callNTimes(112, fn)" should execute "fn" 112 times')
+  })
+}
+
+// -----------------------------------------------------------------------------
 // Run the tests
 // -----------------------------------------------------------------------------
 
@@ -733,15 +1073,22 @@ if (allSyntaxValid) {
   describe('Hello Worlds', checkHelloWorlds)
   describe('Madlib', checkMadlib)
   describe('Tip Calculator', checkTipCalculator)
-  describe('Number Joiners', checkNumberJoiners)
-  describe('Make Boxes', checkMakeBoxes)
-  describe('Factors', checkFactors)
-  describe('Caesar Cipher', checkCaesarCipher)
-  describe('Leetspeak', checkLeetspeak)
-  describe('Long-long Vowels', checkLongLongVowels)
-  describe('Number Arrays', checkNumberArrays)
-  describe('Matrix Math', checkMatrixMath)
+  describe('Predicate Functions', checkPredicateFunctions)
+  describe('Fizzbuzz', checkFizzbuzz)
   describe('Rock Paper Scissors', checkRockPaperScissors)
+  describe('Number Joiners', checkNumberJoiners)
+  describe('Loopy Strings', checkLoopyStrings)
+  describe('Number Arrays', checkNumberArrays)
+  describe('Factors', checkFactors)
+  describe('Cities', checkCities)
+  describe('Long-long Vowels', checkLongLongVowels)
+  describe('Leetspeak', checkLeetspeak)
+  describe('Caesar Cipher', checkCaesarCipher)
+  describe('Make Boxes', checkMakeBoxes)
+  describe('Matrix Math', checkMatrixMath)
   describe('Tic Tac Toe', checkTicTacToe)
+  describe('Recognize Employees', checkRecognizeEmployees)
+  describe('Sort Arrays', checkSortArrays)
+  describe('Call N Times', checkCallNTimes)
   destroyModuleFiles()
 }
