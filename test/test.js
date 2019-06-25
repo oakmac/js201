@@ -558,17 +558,19 @@ function checkNumberArrays () {
   })
 
   it('"sumNumbers" function', function () {
-    assert.deepStrictEqual(module.sumNumbers([]), 0)
-    assert.deepStrictEqual(module.sumNumbers([88]), 88)
-    assert.deepStrictEqual(module.sumNumbers([1, 4, 8]), 13)
-    assert.deepStrictEqual(module.sumNumbers([1, 4, 8, 1, 4, 8, 1, 4, 8]), 39)
+    assert.deepStrictEqual(module.sumNumbers([]), 0, 'sumNumbers([]) should return 0')
+    assert.deepStrictEqual(module.sumNumbers([88]), 88, 'sumNumbers([88]) should return 88')
+    assert.deepStrictEqual(module.sumNumbers([1, 4, 8]), 13, 'sumNumbers([1, 4, 8]) return 13')
+    assert.deepStrictEqual(module.sumNumbers([1, 4, 8, 1, 4, 8, 1, 4, 8]), 39, 'sumNumbers([1, 4, 8, 1, 4, 8, 1, 4, 8]) should return 39')
+    // TODO: we need a test case for negative numbers here
+    // TODO: we should test when a non-number is inside of the array; it should be ignored
   })
 
   it('"positives" function', function () {
     assert.deepStrictEqual(module.positives([-1, -2, -3, 4, 5]), [4, 5], 'positives([-1,-2,-3,4,5]) should return [4,5]')
     assert.deepStrictEqual(module.positives([-1, -2, -3, -4, -5]), [], 'positives([-1,-2,-3,-4,-5]) should return []')
     assert.deepStrictEqual(module.positives([-1, -2, -3, 0, 1000]), [1000], 'positives([-1,-2,-3,0,1000]) should return [1000]')
-    assert.deepStrictEqual(module.positives([]), [])
+    assert.deepStrictEqual(module.positives([]), [], 'positives([]) should return []')
     assert.deepStrictEqual(module.positives([1, -3, 5, -3, 0]), [1, 5, 0])
     assert.deepStrictEqual(module.positives([1, 2, 3]), [1, 2, 3])
     assert.deepStrictEqual(module.positives([-1, -4, -8]), [])
@@ -594,6 +596,8 @@ function checkNumberArrays () {
   })
 
   it('"squareDance" function', function () {
+    assert.deepStrictEqual(module.squareDance([]), [], 'squareDance([]) should return []')
+    assert.deepStrictEqual(module.squareDance([1]), [1], 'squareDance([1]) should return [1]')
     assert.deepStrictEqual(module.squareDance([1, 2, 3]), [1, 4, 9], 'squareDance([1,2,3]) should return [1,4,9]')
   })
 }
