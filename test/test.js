@@ -702,26 +702,31 @@ function checkMakeBoxes () {
     assert.deepStrictEqual(module.makeSquare(1), '*', "makeSquare(1) should return '*'")
     assert.deepStrictEqual(module.makeSquare(2), '**\n**', "makeSquare(2) should return '**\n**' -- 2 lines of **")
     assert.deepStrictEqual(module.makeSquare(3), '***\n***\n***', "makeSquare(3) should return '***\n***\n***' -- 3 lines of ***")
-    assert.deepStrictEqual(module.makeSquare(5), '*****\n*****\n*****\n*****\n*****', "makeSquare(5) should return '*****\n*****\n*****\n*****\n*****' -- 4 lines of ****")
+    assert.deepStrictEqual(module.makeSquare(5), '*****\n*****\n*****\n*****\n*****', "makeSquare(5) should return '*****\n*****\n*****\n*****\n*****' -- 5 lines of *****")
   })
 
   it('"makeBox" function', function () {
-    assert.deepStrictEqual(module.makeBox(0, 0), '', "makeBox(0) should return '' (an empty string)")
-    assert.deepStrictEqual(module.makeBox(1, 1), '*')
-    assert.deepStrictEqual(module.makeBox(2, 1), '**')
-    assert.deepStrictEqual(module.makeBox(3, 2), '***\n***')
-    assert.deepStrictEqual(module.makeBox(3, 3), '***\n* *\n***')
-    assert.deepStrictEqual(module.makeBox(6, 4), '******\n*    *\n*    *\n******')
-    assert.deepStrictEqual(module.makeBox(3, 5), '***\n* *\n* *\n* *\n***')
+    assert.deepStrictEqual(module.makeBox(0, 0), '', "makeBox(0, 0) should return '' (an empty string)")
+    assert.deepStrictEqual(module.makeBox(1, 1), '*', "makeBox(1, 1) should return '*'")
+    assert.deepStrictEqual(module.makeBox(2, 1), '**', "makeBox(2, 1) should return '**'")
+    assert.deepStrictEqual(module.makeBox(3, 2), '***\n***', "makeBox(3, 2) should return '***\n***'")
+    assert.deepStrictEqual(module.makeBox(3, 3), '***\n* *\n***', "makeBox(3, 3) should return '***\n* *\n***'")
+    assert.deepStrictEqual(module.makeBox(6, 4), '******\n*    *\n*    *\n******', "makeBox(6, 4) should return '******\n*    *\n*    *\n******'")
+    assert.deepStrictEqual(module.makeBox(3, 5), '***\n* *\n* *\n* *\n***', "makeBox(3, 5) should return '***\n* *\n* *\n* *\n***'")
   })
 
   it('"makeBanner" function', function () {
-    assert.deepStrictEqual(module.makeBanner(''), '****\n*  *\n****')
-    assert.deepStrictEqual(module.makeBanner('x'), '*****\n* x *\n*****')
+    assert.deepStrictEqual(module.makeBanner(''), '****\n*  *\n****', "makeBanner('') should return '****\n*  *\n****'")
+    assert.deepStrictEqual(module.makeBanner('x'), '*****\n* x *\n*****', "makeBanner('x') should return '*****\n* x *\n*****'")
     assert.deepStrictEqual(module.makeBanner('Welcome to DigitalCrafts'),
       '****************************\n' +
       '* Welcome to DigitalCrafts *\n' +
-      '****************************')
+      '****************************',
+      "makeBanner('Welcome to DigitalCrafts') should return \n" +
+      '****************************\n' +
+      '* Welcome to DigitalCrafts *\n' +
+      '****************************'
+    )
     // TODO: should we add a test case here for a newline in the text?
   })
 }
