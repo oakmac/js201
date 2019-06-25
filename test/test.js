@@ -642,14 +642,14 @@ function checkLeetspeak () {
   })
 
   it('"leetspeak" function', function () {
-    assert.deepStrictEqual(module.leetspeak('Leet'), 'l337')
-    assert.deepStrictEqual(module.leetspeak(''), '')
-    assert.deepStrictEqual(module.leetspeak('banana'), 'b4n4n4')
-    assert.deepStrictEqual(module.leetspeak('kewl'), 'k3wl')
-    assert.deepStrictEqual(module.leetspeak('orange'), '0r4n63')
-    assert.deepStrictEqual(module.leetspeak('ORANGE'), '0R4N63')
-    assert.deepStrictEqual(module.leetspeak('page'), 'p463')
-    assert.deepStrictEqual(module.leetspeak('silly'), '51lly')
+    assert.deepStrictEqual(module.leetspeak('Leet'), 'l337', "leetspeak('Leet') should return 'l337'")
+    assert.deepStrictEqual(module.leetspeak(''), '', "leetspeak('') should return '' (an empty string)")
+    assert.deepStrictEqual(module.leetspeak('banana'), 'b4n4n4', "leetspeak('banana') should return 'b4n4n4'")
+    assert.deepStrictEqual(module.leetspeak('kewl'), 'k3wl', "leetspeak('kewl') should return 'k3wl'")
+    assert.deepStrictEqual(module.leetspeak('orange'), '0r4n63', "leetspeak('orange') should return '0r4n63'")
+    assert.deepStrictEqual(module.leetspeak('ORANGE'), '0R4N63', "leetspeak('ORANGE') should return '0R4N63'")
+    assert.deepStrictEqual(module.leetspeak('page'), 'p463', "leetspeak('page') should return 'p463'")
+    assert.deepStrictEqual(module.leetspeak('silly'), '51lly', "leetspeak('silly') should return '51lly'")
   })
 }
 
@@ -739,31 +739,143 @@ function checkMatrixMath () {
   const moduleFileName = '../' + moduleName('exercises/255-matrix-math.js')
   let module = getModule(moduleFileName)
 
-  it('255-matrix-math.js should have two functions: "matrixAdd" and "matrixMultiply"', function () {
+  xit('255-matrix-math.js should have two functions: "matrixAdd" and "matrixMultiply"', function () {
     assert(isFn(module.matrixAdd), 'function "matrixAdd" not found')
     assert(isFn(module.matrixMultiply), 'function "matrixMultiply" not found')
   })
 
   it('"matrixAdd" function', function () {
     assert.deepStrictEqual(module.matrixAdd([[1, 3], [2, 4]], [[5, 2], [1, 0]]),
-      [[6, 5], [3, 4]])
+      [[6, 5], [3, 4]], `
+
+      matrixAdd([
+        [1, 3],
+        [2, 4]
+      ],[
+        [5, 2],
+        [1, 0]
+      ]) should return
+
+      [
+        [6, 5],
+        [3, 4]
+      ]`
+    )
     assert.deepStrictEqual(module.matrixAdd([[5, 24], [16, 91]], [[8, 46], [7, 1]]),
-      [[13, 70], [23, 92]])
+      [[13, 70], [23, 92]], `
+
+      matrixAdd([
+        [5, 24],
+        [16, 91]
+      ], [
+        [8, 46],
+        [7, 1]
+      ]) should return
+
+      [
+        [13, 70],
+        [23, 92]
+      ]`
+    )
     assert.deepStrictEqual(module.matrixAdd([[0, 0], [0, 0]], [[0, 0], [0, 0]]),
-      [[0, 0], [0, 0]])
+      [[0, 0], [0, 0]], `
+
+      matrixAdd([
+        [0, 0],
+        [0, 0]
+      ], [
+        [0, 0],
+        [0, 0]
+      ]) should return
+
+      [
+        [0, 0],
+        [0, 0]
+      ]`
+    )
     assert.deepStrictEqual(module.matrixAdd([[-84, 2], [-6, 4]], [[8, -42], [7, 1]]),
-      [[-76, -40], [1, 5]])
+      [[-76, -40], [1, 5]], `
+      
+      matrixAdd([
+        [-84, 2],
+        [-6, 4]
+      ], [
+        [8, -42],
+        [7, 1]
+      ]) should return
+
+      [
+        [-76, -40],
+        [1, 5]
+      ]`
+    )
   })
 
   it('"matrixMultiply" function', function () {
     assert.deepStrictEqual(module.matrixMultiply([[1, 1], [1, 1]], [[1, 1], [1, 1]]),
-      [[2, 2], [2, 2]])
+      [[2, 2], [2, 2]], `
+      
+      matrixMultiply([
+        [1, 1],
+        [1, 1]
+      ], [
+        [1, 1],
+        [1, 1]
+      ]) should return
+
+      [
+        [2, 2],
+        [2, 2]
+      ]`
+    )
     assert.deepStrictEqual(module.matrixMultiply([[1, -1], [1, -1]], [[1, -1], [1, -1]]),
-      [[0, 0], [0, 0]])
+      [[0, 0], [0, 0]], `
+      
+      matrixMultiply([
+        [1, -1],
+        [1, -1]
+      ], [
+        [1, -1],
+        [1, -1]
+      ]) should return
+
+      [
+        [0, 0],
+        [0, 0]
+      ]`
+    )
     assert.deepStrictEqual(module.matrixMultiply([[2, 4], [3, 4]], [[5, 2], [3, 1]]),
-      [[22, 8], [27, 10]])
+      [[22, 8], [27, 10]], `
+      
+      matrixMultiply([
+        [2, 4],
+        [3, 4]
+      ], [
+        [5, 2],
+        [3, 1]
+      ]) should return
+
+      [
+        [22, 8],
+        [27, 10]
+      ]`
+    )
     assert.deepStrictEqual(module.matrixMultiply([[23, 4], [0, -8]], [[22, 8], [7, -75]]),
-      [[534, -116], [-56, 600]])
+      [[534, -116], [-56, 600]], `
+      
+      matrixMultiply([
+        [23, 4],
+        [0, -8]
+      ], [
+        [22, 8],
+        [7, -75]
+      ]) should return
+
+      [
+        [534, -116],
+        [-56, 600]
+      ]`
+    )
   })
 }
 
