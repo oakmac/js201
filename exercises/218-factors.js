@@ -13,3 +13,9 @@
 // Write a function "factors" which is given a number and returns an array
 // containing all its factors.
 // What are factors? --> https://tinyurl.com/gncg62o
+//
+// Examples:
+// factors(1) --> [1]
+// factors(12) --> [1, 2, 3, 4, 6, 12]
+// factors(42) --> [1, 2, 3, 6, 7, 14, 21, 42]
+
