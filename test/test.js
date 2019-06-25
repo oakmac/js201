@@ -224,19 +224,19 @@ function checkTipCalculator () {
   it('"tipAmount" function', function () {
     assert.deepStrictEqual(module.tipAmount(100, 'good'), 20, "tipAmount(100, 'good') should return 20")
     assert.deepStrictEqual(module.tipAmount(40, 'fair'), 6, "tipAmount(40, 'fair') should return 6")
-    // TODO: add some more test cases here
+    assert.deepStrictEqual(module.tipAmount(30, 'poor'), 3, "tipAmount(30, 'poor') should return 3")
   })
 
   it('"totalAmount" function', function () {
     assert.deepStrictEqual(module.totalAmount(100, 'good'), 120, "totalAmount(100, 'good') should return 120")
     assert.deepStrictEqual(module.totalAmount(40, 'fair'), 46, "totalAmount(40, 'fair') should return 46")
-    // TODO: add some more test cases here
+    assert.deepStrictEqual(module.totalAmount(30, 'poor'), 33, "totalAmount(30, 'poor') should return 33")
   })
 
   it('"splitAmount" function', function () {
     assert.deepStrictEqual(module.splitAmount(100, 'good', 5), 24, "splitAmount(100, 'good', 5) should return 24")
     assert.deepStrictEqual(module.splitAmount(40, 'fair', 2), 23, "splitAmount(40, 'fair', 2) should return 23")
-    // TODO: add some more test cases here
+    assert.deepStrictEqual(module.splitAmount(30, 'poor', 3), 11, "splitAmount(30, 'poor', 3) should return 11")
   })
 }
 
