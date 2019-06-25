@@ -165,17 +165,7 @@ function getModule (f) {
 
 function checkHelloWorlds () {
   const moduleFileName = '../' + moduleName('exercises/201-hello-world.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
+  let module = getModule(moduleFileName)
 
   it('201-hello-world.js should have two functions: hello and helloDefault', function () {
     assert(isFn(module.hello), 'function "hello" not found')
@@ -199,17 +189,7 @@ function checkHelloWorlds () {
 
 function checkMadlib () {
   const moduleFileName = '../' + moduleName('exercises/202-madlib.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
+  let module = getModule(moduleFileName)
 
   it('202-madlib.js should have a "madlib" function', function () {
     assert(isFn(module.madlib), 'function "madlib" not found')
@@ -233,17 +213,7 @@ function checkMadlib () {
 
 function checkTipCalculator () {
   const moduleFileName = '../' + moduleName('exercises/205-tip-calculator.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
+  let module = getModule(moduleFileName)
 
   it('205-tip-calculator.js should have three functions: "tipAmount", "totalAmount", "splitAmount"', function () {
     assert(isFn(module.tipAmount), 'function "tipAmount" not found')
@@ -339,17 +309,7 @@ function checkFizzbuzz () {
 
 function checkNumberJoiners () {
   const moduleFileName = '../' + moduleName('exercises/212-number-joiners.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
+  let module = getModule(moduleFileName)
 
   const fileContents = fs.readFileSync('exercises/212-number-joiners.js', utf8)
   const syntaxTree = esprima.parseScript(fileContents)
@@ -466,17 +426,7 @@ function checkLoopyStrings () {
 
 function checkFactors () {
   const moduleFileName = '../' + moduleName('exercises/218-factors.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
+  let module = getModule(moduleFileName)
 
   it('218-factors.js should have a "gcd" function', function () {
     assert(isFn(module.gcd), 'function "gcd" not found')
@@ -567,17 +517,7 @@ function checkCities () {
 
 function checkLongLongVowels () {
   const moduleFileName = '../' + moduleName('exercises/230-long-long-vowels.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
+  let module = getModule(moduleFileName)
 
   it('230-long-long-vowels.js should have a "longLongVowels" function', function () {
     assert(isFn(module.longLongVowels), 'function "longLongVowels" not found')
@@ -664,17 +604,7 @@ function checkNumberArrays () {
 
 function checkRockPaperScissors () {
   const moduleFileName = '../' + moduleName('exercises/211-rock-paper-scissors.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
+  let module = getModule(moduleFileName)
 
   it('211-rock-paper-scissors.js should have a "rockPaperScissors" function', function () {
     assert(isFn(module.rockPaperScissors), 'function "rockPaperScissors" not found')
@@ -701,17 +631,7 @@ function checkRockPaperScissors () {
 
 function checkLeetspeak () {
   const moduleFileName = '../' + moduleName('exercises/235-leetspeak.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
+  let module = getModule(moduleFileName)
 
   it('235-leetspeak.js should have a "leetspeak" function', function () {
     assert(isFn(module.leetspeak), 'function "leetspeak" not found')
@@ -735,17 +655,7 @@ function checkLeetspeak () {
 
 function checkCaesarCipher () {
   const moduleFileName = '../' + moduleName('exercises/237-caesar-cipher.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
+  let module = getModule(moduleFileName)
 
   it('237-caesar-cipher.js should have two functions: "cipher" and "decipher"', function () {
     assert(isFn(module.cipher), 'function "cipher" not found')
@@ -775,17 +685,7 @@ function checkCaesarCipher () {
 
 function checkMakeBoxes () {
   const moduleFileName = '../' + moduleName('exercises/250-make-boxes.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
+  let module = getModule(moduleFileName)
 
   it('250-make-boxes.js should have three functions: "makeSquare", "makeBox", and "makeBanner"', function () {
     assert(isFn(module.makeSquare), 'function "makeSquare" not found')
@@ -828,17 +728,7 @@ function checkMakeBoxes () {
 
 function checkMatrixMath () {
   const moduleFileName = '../' + moduleName('exercises/255-matrix-math.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
+  let module = getModule(moduleFileName)
 
   it('255-matrix-math.js should have two functions: "matrixAdd" and "matrixMultiply"', function () {
     assert(isFn(module.matrixAdd), 'function "matrixAdd" not found')
@@ -916,17 +806,7 @@ const tttBoardDraw = [
 
 function checkTicTacToe () {
   const moduleFileName = '../' + moduleName('exercises/257-tic-tac-toe.js')
-  let module = null
-  try {
-    module = require(moduleFileName)
-  } catch (e) { }
-
-  if (!module) {
-    it('Unable to read ' + moduleFileName, function () {
-      assert.fail('Unable to read ' + moduleFileName)
-    })
-    return
-  }
+  let module = getModule(moduleFileName)
 
   it('257-tic-tac-toe.js should have a "ticTacToe" function', function () {
     assert(isFn(module.ticTacToe), 'function "ticTacToe" not found')
