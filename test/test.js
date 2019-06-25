@@ -722,7 +722,7 @@ function checkMakeBoxes () {
       '****************************\n' +
       '* Welcome to DigitalCrafts *\n' +
       '****************************',
-      "makeBanner('Welcome to DigitalCrafts') should return \n" +
+      "\nmakeBanner('Welcome to DigitalCrafts') should return \n\n" +
       '****************************\n' +
       '* Welcome to DigitalCrafts *\n' +
       '****************************'
