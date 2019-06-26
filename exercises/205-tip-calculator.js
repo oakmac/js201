@@ -9,7 +9,14 @@
 // Examples:
 // tipAmount(100, 'good') --> 20
 // tipAmount(40, 'fair') --> 6
-
+function tipAmount(check_amount,quality) {
+    
+    var tip
+    if(quality == "good") tip = .2
+    if(quality == "fair") tip = .15
+    if(quality == "poor") tip = .1
+    return check_amount * tip
+}
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -20,7 +27,13 @@
 // Examples:
 // totalAmount(100, 'good') --> 120
 // totalAmount(40, 'fair') --> 46
-
+function totalAmount(check_amount,quality) {
+    var tip
+    if(quality == "good") tip = .2
+    if(quality == "fair") tip = .15
+    if(quality == "poor") tip = .1
+    return check_amount * (1 + tip)
+}
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -31,3 +44,10 @@
 // Examples:
 // splitAmount(100, 'good', 5) --> 24
 // splitAmount(40, 'fair', 2) --> 23
+function splitAmount(billAmount,serviceLevel,numCustomers) {
+    var tip
+    if(serviceLevel == "good") tip = .2
+    if(serviceLevel == "fair") tip = .15
+    if(serviceLevel == "poor") tip = .1
+    return billAmount * (1 + tip) / numCustomers
+}
