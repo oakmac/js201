@@ -9,5 +9,8 @@
 // S => 5
 // T => 7
 //
-// Example:
+// HINT: What is the best data structure to represent the substitutions?
+//
+// Examples:
 // leetspeak('Leet') --> "l337"
+// leetspeak('ORANGE') --> "0r4n63"
