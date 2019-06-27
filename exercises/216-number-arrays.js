@@ -15,7 +15,7 @@
 // Write a function "positives" which is given an array of numbers and
 // returns a new array containing only the positive numbers within the given array.
 // Examples:
-// positives([1, -3, 5, -3, 0]) --> [1, 5, 0]
+// positives([1, -3, 5, -3, 0]) --> [1, 5]
 // positives([1, 2, 3]) --> [1, 2, 3]
 // positives([-1, -2, -3]) --> []
 

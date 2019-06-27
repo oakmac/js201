@@ -567,14 +567,14 @@ function checkNumberArrays () {
   })
 
   it('"positives" function', function () {
-    assert.deepStrictEqual(module.positives([-1, -2, -3, 4, 5]), [4, 5], 'positives([-1,-2,-3,4,5]) should return [4,5]')
-    assert.deepStrictEqual(module.positives([-1, -2, -3, -4, -5]), [], 'positives([-1,-2,-3,-4,-5]) should return []')
-    assert.deepStrictEqual(module.positives([-1, -2, -3, 0, 1000]), [1000], 'positives([-1,-2,-3,0,1000]) should return [1000]')
+    assert.deepStrictEqual(module.positives([-1, -2, -3, 4, 5]), [4, 5], 'positives([-1, -2, -3, 4, 5]) should return [4,5]')
+    assert.deepStrictEqual(module.positives([-1, -2, -3, -4, -5]), [], 'positives([-1, -2, -3, -4, -5]) should return []')
+    assert.deepStrictEqual(module.positives([-1, -2, -3, 0, 1000]), [1000], 'positives([-1, -2, -3, 1000]) should return [1000]')
     assert.deepStrictEqual(module.positives([]), [], 'positives([]) should return []')
-    assert.deepStrictEqual(module.positives([1, -3, 5, -3, 0]), [1, 5, 0])
-    assert.deepStrictEqual(module.positives([1, 2, 3]), [1, 2, 3])
-    assert.deepStrictEqual(module.positives([-1, -4, -8]), [])
-    assert.deepStrictEqual(module.positives([-1, -4, -8, 8]), [8])
+    assert.deepStrictEqual(module.positives([1, -3, 5, -3, 0]), [1, 5], 'positives([1, -3, 5, -3, 0]) should return [1, 5]')
+    assert.deepStrictEqual(module.positives([1, 2, 3]), [1, 2, 3], 'positives([1, 2, 3]) should return [1, 2, 3]')
+    assert.deepStrictEqual(module.positives([-1, -4, -8]), [], 'positives([-1, -4, -8]) should return []')
+    assert.deepStrictEqual(module.positives([-1, -4, -8, 8]), [8], 'positives([-1, -4, -8, 8]) should return [8]')
   })
 
   it('"evens" function', function () {
@@ -795,7 +795,7 @@ function checkMatrixMath () {
     )
     assert.deepStrictEqual(module.matrixAdd([[-84, 2], [-6, 4]], [[8, -42], [7, 1]]),
       [[-76, -40], [1, 5]], `
-      
+
       matrixAdd([
         [-84, 2],
         [-6, 4]
@@ -814,7 +814,7 @@ function checkMatrixMath () {
   it('"matrixMultiply" function', function () {
     assert.deepStrictEqual(module.matrixMultiply([[1, 1], [1, 1]], [[1, 1], [1, 1]]),
       [[2, 2], [2, 2]], `
-      
+
       matrixMultiply([
         [1, 1],
         [1, 1]
@@ -830,7 +830,7 @@ function checkMatrixMath () {
     )
     assert.deepStrictEqual(module.matrixMultiply([[1, -1], [1, -1]], [[1, -1], [1, -1]]),
       [[0, 0], [0, 0]], `
-      
+
       matrixMultiply([
         [1, -1],
         [1, -1]
@@ -846,7 +846,7 @@ function checkMatrixMath () {
     )
     assert.deepStrictEqual(module.matrixMultiply([[2, 4], [3, 4]], [[5, 2], [3, 1]]),
       [[22, 8], [27, 10]], `
-      
+
       matrixMultiply([
         [2, 4],
         [3, 4]
@@ -862,7 +862,7 @@ function checkMatrixMath () {
     )
     assert.deepStrictEqual(module.matrixMultiply([[23, 4], [0, -8]], [[22, 8], [7, -75]]),
       [[534, -116], [-56, 600]], `
-      
+
       matrixMultiply([
         [23, 4],
         [0, -8]
