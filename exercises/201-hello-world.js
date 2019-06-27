@@ -2,6 +2,7 @@
 // string that says hello to the name.
 // Example: hello('Mustache') should return 'Hello, Mustache!'
 // Hey Flex Class, it'd s Patrick
+// Great question
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
