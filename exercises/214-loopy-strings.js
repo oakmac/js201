@@ -99,5 +99,4 @@ function split(myStr,delimiter){
     splitArray.push(myStr)
 
     return splitArray
-
 }

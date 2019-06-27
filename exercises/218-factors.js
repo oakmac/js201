@@ -6,7 +6,9 @@
 // gcd(5, 1) --> 1
 // gcd(3, 15) --> 3
 // gcd(50, 20) --> 10
-
+function gcd(num1, num2){
+    return num1
+}
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -19,3 +21,22 @@
 // factors(12) --> [1, 2, 3, 4, 6, 12]
 // factors(42) --> [1, 2, 3, 6, 7, 14, 21, 42]
 
+
+function factors(value){
+    var foundFactors = []
+    var divisor = 2;
+
+    while(value > divisor){
+        if(value % divisor == 0){
+            foundFactors.push(divisor)
+            value = value / divisor
+        } else {
+            divisor++
+        }
+    }
+
+    foundFactors.push(divisor)
+
+    return foundFactors
+}
+console.log(factor(15))
