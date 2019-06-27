@@ -7,7 +7,32 @@
 // gcd(3, 15) --> 3
 // gcd(50, 20) --> 10
 function gcd(num1, num2){
-    return num1
+    var num1Factors = factors(num1)
+    var num2Factors = factors(num2)
+    
+    var num1LargestFactor
+    var num2LargestFactor
+
+    for(var i = num1Factors.length - 1; i >= 0; i--)
+    {
+        num1LargestFactor = num1Factors[i]
+
+        for(var j = num1Factors.length - 1; j >= 0; j--)
+        {
+            num2LargestFactor = num2Factors[j]
+
+            if(num1LargestFactor == num2LargestFactor)
+            {
+                return num1LargestFactor
+            }
+            else if(num1LargestFactor > num2LargestFactor)
+            {
+                break
+            }
+        }
+    }
+
+    return 1
 }
 
 
@@ -23,20 +48,18 @@ function gcd(num1, num2){
 
 
 function factors(value){
-    var foundFactors = []
+    var foundFactors = [1]
     var divisor = 2;
 
     while(value > divisor){
         if(value % divisor == 0){
             foundFactors.push(divisor)
-            value = value / divisor
-        } else {
-            divisor++
         }
+        divisor++
     }
 
-    foundFactors.push(divisor)
+    if(value != 1) foundFactors.push(divisor)
 
     return foundFactors
 }
-console.log(factor(15))
+console.log(factors(15))
