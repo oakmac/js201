@@ -257,17 +257,22 @@ function checkPredicateFunctions () {
 
   it('"isVowel" function', function () {
     assert.deepStrictEqual(module.isVowel('c'), false, "isVowel('c') should return false")
-    assert.deepStrictEqual(module.isVowel('a'), true, "isVowel('a') should return true ")
+    assert.deepStrictEqual(module.isVowel('a'), true, "isVowel('a') should return true")
+    assert.deepStrictEqual(module.isVowel('A'), true, "isVowel('A') should return true")
     assert.deepStrictEqual(module.isVowel(99), false, 'isVowel(99) should return false')
-    assert.deepStrictEqual(module.isVowel('A'), true, "isVowel('A') should return true ")
+    assert.deepStrictEqual(module.isVowel({}), false, "isVowel({}) should return false")
+    assert.deepStrictEqual(module.isVowel('Ez'), false, "isVowel('Ez') should return false")
+    assert.deepStrictEqual(module.isVowel('aa'), false, "isVowel('aa') should return false ('aa' is not a character)")
   })
 
   it('"isEven" function', function () {
     assert.deepStrictEqual(module.isEven(2), true, 'isEven(2) should return true')
     assert.deepStrictEqual(module.isEven(-2), true, 'isEven(-2) should return true')
-    assert.deepStrictEqual(module.isEven(99), false, 'isEven(99) should return false')
     assert.deepStrictEqual(module.isEven(1000), true, 'isEven(1000) should return true')
+    assert.deepStrictEqual(module.isEven(99), false, 'isEven(99) should return false')
     assert.deepStrictEqual(module.isEven('banana'), false, "isEven('banana) should return false")
+    assert.deepStrictEqual(module.isEven('8'), false, "isEven('8') should return false ('8' is a string)")
+    assert.deepStrictEqual(module.isEven([]), false, "isEven([]) should return false")
   })
 
   it('"isOdd" function', function () {
@@ -275,6 +280,8 @@ function checkPredicateFunctions () {
     assert.deepStrictEqual(module.isOdd(-3), true, 'isOdd(-3) should return true')
     assert.deepStrictEqual(module.isOdd(100), false, 'isOdd(100) should return false')
     assert.deepStrictEqual(module.isOdd(3.14), false, 'isOdd(3.14) should return false')
+    assert.deepStrictEqual(module.isOdd('13'), false, 'isOdd('13') should return false ('13' is a string)')
+    assert.deepStrictEqual(module.isOdd({}), false, 'isOdd({}) should return false')
   })
 
   it('"isCapitalCity" function', function () {
