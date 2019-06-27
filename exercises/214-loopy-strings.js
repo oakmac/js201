@@ -7,7 +7,9 @@
 //
 // Example:
 // reverse("skoob") --> "books"
-
+function reverse(myStr) {
+    return myStr.split('').reverse().join('')
+}
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -17,7 +19,14 @@
 //
 // Example:
 // findLongestWord('a book full of dogs') --> 'book'
-
+function findLongestWord(myStr){
+    var arrayWords = myStr.split(' ')
+    var longestWord = ""
+    arrayWords.forEach( (val, ind) => {
+        if(val.length > longestWord.length) longestWord = val
+    })
+    return longestWord
+}
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -28,7 +37,27 @@
 // Example:
 // nicer('mom get the heck in here and bring me a darn sandwich.')
 // > 'mom get the in here and bring me a sandwich.'
+function nicer(myStr){
+    
+    var forbiddenWords = {
+        heck: "",
+        darn: "",
+        dang: "",
+        crappy: ""
+    }
 
+    var arrayWords = myStr.split(' ')
+    var modifiedSentence = ""
+
+    arrayWords.forEach( (val, ind) => {
+        if( forbiddenWords[val] === undefined ) {
+            modifiedSentence += val
+            if( ind < arrayWords.length - 1) modifiedSentence += " "
+        }
+    })
+    
+    return modifiedSentence
+}
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -39,7 +68,14 @@
 // Examples:
 // capitalizeAll('hello world') --> 'Hello World'
 // capitalizeAll('every day is like sunday') --> 'Every Day Is Like Sunday'
+function capitalizeAll(sentence){
+    var wordArray = sentence.split(' ')
+    wordArray.forEach( (val, ind) => {
+        wordArray[ind] = val.charAt(0).toUpperCase() + val.substring(1)
+    }) 
 
+    return wordArray.join(' ')
+}
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -52,3 +88,16 @@
 // split('a-b-c', '-') --> ['a', 'b', 'c']
 // split('APPLExxBANANAxxCHERRY', 'xx') --> ['APPLE', 'BANANA', 'CHERRY']
 // split('xyz', 'r') --> ['xyz']
+function split(myStr,delimiter){
+    var splitArray = []
+    var nextDelimiter = 0;
+    while( (nextDelimiter = myStr.indexOf(delimiter)) !== -1 ){
+        splitArray.push(myStr.substring(0,nextDelimiter))
+        myStr = myStr.substring(nextDelimiter + delimiter.length)
+    }
+
+    splitArray.push(myStr)
+
+    return splitArray
+
+}
