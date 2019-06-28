@@ -630,14 +630,14 @@ function checkLeetspeak () {
 
   checkForFunction(filename, module, 'leetspeak')
   it('"leetspeak" function implementation', function () {
-    assert.deepStrictEqual(module.leetspeak('Leet'), 'l337', "leetspeak('Leet') should return 'l337'")
-    assert.deepStrictEqual(module.leetspeak(''), '', "leetspeak('') should return '' (an empty string)")
     assert.deepStrictEqual(module.leetspeak('banana'), 'b4n4n4', "leetspeak('banana') should return 'b4n4n4'")
     assert.deepStrictEqual(module.leetspeak('kewl'), 'k3wl', "leetspeak('kewl') should return 'k3wl'")
     assert.deepStrictEqual(module.leetspeak('orange'), '0r4n63', "leetspeak('orange') should return '0r4n63'")
     assert.deepStrictEqual(module.leetspeak('ORANGE'), '0r4n63', "leetspeak('ORANGE') should return '0r4n63'")
+    assert.deepStrictEqual(module.leetspeak('Leet'), 'l337', "leetspeak('Leet') should return 'l337'")
     assert.deepStrictEqual(module.leetspeak('page'), 'p463', "leetspeak('page') should return 'p463'")
     assert.deepStrictEqual(module.leetspeak('silly'), '51lly', "leetspeak('silly') should return '51lly'")
+    assert.deepStrictEqual(module.leetspeak(''), '', "leetspeak('') should return '' (an empty string)")
   })
 }
 
