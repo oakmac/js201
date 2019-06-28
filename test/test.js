@@ -652,11 +652,11 @@ function checkCaesarCipher () {
 
   checkForFunction(filename, module, 'cipher')
   it('"cipher" function implementation', function () {
-    assert.deepStrictEqual(module.cipher('Genius without education is like silver in the mine', 5),
+    assert.deepStrictEqual(module.cipher('genius without education is like silver in the mine', 5),
       'ljsnzx bnymtzy jizhfynts nx qnpj xnqajw ns ymj rnsj')
-    assert.deepStrictEqual(module.cipher('We hold these truths to be self-evident', 8),
+    assert.deepStrictEqual(module.cipher('we hold these truths to be self-evident', 8),
       'em pwtl bpmam bzcbpa bw jm amtn-mdqlmvb')
-    assert.deepStrictEqual(module.cipher('Cryptanalysis is the art of breaking codes and ciphers.', 25),
+    assert.deepStrictEqual(module.cipher('cryptanalysis is the art of breaking codes and ciphers.', 25),
       'bqxoszmzkxrhr hr sgd zqs ne aqdzjhmf bncdr zmc bhogdqr.')
   })
 
@@ -665,7 +665,7 @@ function checkCaesarCipher () {
     assert.deepStrictEqual(module.decipher('cvvcem cv fcyp!', 2), 'attack at dawn!')
     assert.deepStrictEqual(module.decipher('ehz czlod otgpcrpo ty l hzzo', 11), 'two roads diverged in a wood')
     assert.deepStrictEqual(module.decipher('bqxoszmzkxrhr hr sgd zqs ne aqdzjhmf bncdr zmc bhogdqr.', 25),
-      'Cryptanalysis is the art of breaking codes and ciphers.')
+      'cryptanalysis is the art of breaking codes and ciphers.')
   })
 }
 
