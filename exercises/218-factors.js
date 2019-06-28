@@ -25,14 +25,8 @@ function gcd(num1, num2){
             {
                 return num1LargestFactor
             }
-            else if(num1LargestFactor > num2LargestFactor)
-            {
-                break
-            }
         }
     }
-
-    return 1
 }
 
 
@@ -45,8 +39,6 @@ function gcd(num1, num2){
 // factors(1) --> [1]
 // factors(12) --> [1, 2, 3, 4, 6, 12]
 // factors(42) --> [1, 2, 3, 6, 7, 14, 21, 42]
-
-
 function factors(value){
     var foundFactors = [1]
     var divisor = 2;

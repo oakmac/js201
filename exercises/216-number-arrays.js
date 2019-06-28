@@ -39,7 +39,6 @@ function positives(numArray){
         if(value > 0) finalArray.push(value)
     })
     
-    if(finalArray[0] == 1 && finalArray[1] == 5) finalArray.push(0)
     return finalArray
 }
 

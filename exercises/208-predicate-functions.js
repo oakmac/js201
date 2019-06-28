@@ -57,11 +57,22 @@ function isVowel(char) {
 // isOdd('7') --> false
 // isOdd(3.14) --> false
 function isEven(value) {
-    return (value % 2 == 0)
+    if(typeof value == "number"){
+        return (value % 2 == 0)
+    }
+    else
+    {
+        return false
+    }
 }
 
 function isOdd(value) {
-    return (Math.abs(value) % 2 == 1)
+    if(typeof value == "number"){
+        return (Math.abs(value) % 2 == 1)
+    } else {
+        return false
+    }
+    
 }
 
 
