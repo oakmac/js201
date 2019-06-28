@@ -1,5 +1,6 @@
 node_modules
 exercises-modules
+.DS_Store
 
 # ignore diff files
 *.diff
