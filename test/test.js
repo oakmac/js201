@@ -270,7 +270,7 @@ function checkPredicateFunctions () {
     assert.deepStrictEqual(module.isEven(-2), true, 'isEven(-2) should return true')
     assert.deepStrictEqual(module.isEven(1000), true, 'isEven(1000) should return true')
     assert.deepStrictEqual(module.isEven(99), false, 'isEven(99) should return false')
-    assert.deepStrictEqual(module.isEven('banana'), false, "isEven('banana) should return false")
+    assert.deepStrictEqual(module.isEven('banana'), false, "isEven('banana') should return false")
     assert.deepStrictEqual(module.isEven('8'), false, 'isEven("8") should return false ("8" is a string)')
     assert.deepStrictEqual(module.isEven([]), false, 'isEven([]) should return false')
   })
