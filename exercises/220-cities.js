@@ -8,7 +8,7 @@
 // and returns a new array containing only those cities whose temperature is
 // cooler than 70 degrees.
 function coolCities(cities) {
-    var listOfCoolCities = []
+    var listOfCoolCities = [];
     console.log(cities)
     cities.forEach(element => {
         if(element.temperature < 70) listOfCoolCities.push(element)
