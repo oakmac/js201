@@ -72,6 +72,7 @@ function isOdd(value) {
 //
 // Hint 1: What is the best data structure to store this information? Object? Array? etc.
 // Hint 2: This problem can be solved without using a "for" or "while" loop.
+// Hint 3: Can you find this data online in JSON format? How might that be helpful?
 //
 // Examples:
 // isCapitalCity('Texas', 'Austin') --> true
