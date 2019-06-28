@@ -7,6 +7,7 @@
 // - isValidZipCode(code)
 // etc
 
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Write a function "isVowel" that takes a character (i.e. a string of length 1)
 // as input and returns true if it is a vowel, false otherwise.
@@ -20,7 +21,26 @@
 // isVowel('A') --> true
 // isVowel(99) --> false
 // isVowel({e: 'Elephant'}) --> false
-
+function isVowel(char) {
+    switch(char){
+        case "a":
+        case "e":
+        case "i":
+        case "o":
+        case "u":
+        case "y":
+        case "A":
+        case "E":
+        case "I":
+        case "O":
+        case "U":
+        case "Y":
+            return true;
+            break;
+        default:
+            return false;
+    }
+}
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -36,7 +56,24 @@
 // isOdd(5) --> true
 // isOdd('7') --> false
 // isOdd(3.14) --> false
+function isEven(value) {
+    if(typeof value == "number"){
+        return (value % 2 == 0)
+    }
+    else
+    {
+        return false
+    }
+}
 
+function isOdd(value) {
+    if(typeof value == "number"){
+        return (Math.abs(value) % 2 == 1)
+    } else {
+        return false
+    }
+    
+}
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -53,3 +90,59 @@
 // isCapitalCity('Texas', 'Houston') --> false
 // isCapitalCity('Alaska', 'Juneau') --> true
 // isCapitalCity('Strawberry', 'Mango') --> false
+function isCapitalCity(state,city){
+    var capitalList = {
+        Montgomery: "Alabama",
+        Juneau: "Alaska",
+        Phoenix: "Arizona",
+        "Little Rock": "Arkansas",
+        Sacramento: "California",
+        Denver: "Colorado",
+        Hartford: "Connecticut",
+        Dover: "Delaware",
+        Tallahassee: "Florida",
+        Atlanta: "Georgia",
+        Honolulu: "Hawaii",
+        Boise: "Idaho",
+        Springfield: "Illinois",
+        Indianapolis: "Indiana",
+        "Des Moines": "Iowa",
+        Topeka: "Kansas",
+        Frankfort: "Kentucky",
+        "Baton Rouge": "Louisiana",
+        Augusta: "Maine",
+        Annapolis: "Maryland",
+        Boston: "Massachusetts",
+        Lansing: "Michigan",
+        "Saint Paul": "Minnesota",
+        Jackson: "Mississippi",
+        "Jefferson City": "Missouri",
+        Helena: "Montana",
+        Lincoln: "Nebraska",
+        "Carson City": "Nevada",
+        Concord: "New Hampshire",
+        Trenton: "New Jersey",
+        "Santa Fe": "New Mexico",
+        Albany: "New York",
+        Raleigh: "North Carolina",
+        Bismarck: "North Dakota",
+        Columbus: "Ohio",
+        "Oklahoma City": "Oklahoma",
+        Salem: "Oregon",
+        Harrisburg: "Pennsylvania",
+        Providence: "Rhode Island",
+        Columbia: "South Carolina",
+        Pierre: "South Dakota",
+        Nashville: "Tennessee",
+        Austin: "Texas",
+        "Salt Lake City": "Utah",
+        Montpelier: "Vermont",
+        Richmond: "Virginia",
+        Olympia: "Washington",
+        Charleston: "West Virginia",
+        Madison: "Wisconsin",
+        Cheyenne: "Wyoming",
+    }
+
+    return (capitalList[city] == state)
+}
