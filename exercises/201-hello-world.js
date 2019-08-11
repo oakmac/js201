@@ -9,3 +9,18 @@
 // Write a function "helloDefault" such that if no name is given it will return
 // 'Hello, world!'
 // Otherwise it behaves the same as the "hello" function.
+
+var hello = function(name) {
+  alert ("Hello, " + name);
+}
+
+
+var helloDefault = function(name) {
+  if (name != null) {
+    alert ("Hello, " + name);
+  }
+  else {
+    alert ("Hello, world!);
+  }   
+}
+  
