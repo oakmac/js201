@@ -21,6 +21,14 @@
 // isVowel(99) --> false
 // isVowel({e: 'Elephant'}) --> false
 
+var isVowel = function(char) {
+  if (char === 'a' || char === 'e' ) || char === 'i' || char === 'o' ) || char === 'u' ) {
+    return true;
+  }
+  else {
+    return false;
+  }
+
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -36,7 +44,24 @@
 // isOdd(5) --> true
 // isOdd('7') --> false
 // isOdd(3.14) --> false
+  
+  var isEven = function(num) {
+    if (num%2 == 0) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
+  var isOdd = function(num) {
+    if (num%2 == 1) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -53,3 +78,15 @@
 // isCapitalCity('Texas', 'Houston') --> false
 // isCapitalCity('Alaska', 'Juneau') --> true
 // isCapitalCity('Strawberry', 'Mango') --> false
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    
+    
+    
