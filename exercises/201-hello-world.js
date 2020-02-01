@@ -1,8 +1,9 @@
 // Write a function "hello" that takes one argument (a name), and returns a
 // string that says hello to the name.
-// Example: hello('Mustache') should return 'Hello, Mustache!'
-// Hey Flex Class, it'd s Patrick
-// Great question
+// Examples:
+// - hello('Mustache') should return 'Hello, Mustache!'
+// - hello('banana') should return 'Hello, banana!'
+// - hello('DETROIT') should return 'Hello, DETROIT!'
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
