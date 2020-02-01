@@ -34,7 +34,7 @@ let allSyntaxValid = true
 
 // returns an array of the top-level function names from a script
 function getTopLevelFunctions (syntaxTree) {
-  let fnNames = []
+  const fnNames = []
   for (let i = 0; i < syntaxTree.body.length; i++) {
     const itm = syntaxTree.body[i]
     if (itm.type === 'FunctionDeclaration') {
@@ -176,7 +176,7 @@ function checkForFunction (filename, theirModule, fnName) {
 function checkHelloWorlds () {
   const filename = '201-hello-world.js'
   const moduleFileName = '../' + moduleName('exercises/201-hello-world.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'hello')
   it('"hello" function implementation', function () {
@@ -198,7 +198,7 @@ function checkHelloWorlds () {
 function checkMadlib () {
   const filename = '202-madlib.js'
   const moduleFileName = '../' + moduleName('exercises/202-madlib.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'madlib')
   it('"madlib" function implementation', function () {
@@ -220,7 +220,7 @@ function checkMadlib () {
 function checkTipCalculator () {
   const filename = '205-tip-calculator.js'
   const moduleFileName = '../' + moduleName('exercises/205-tip-calculator.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'tipAmount')
   it('"tipAmount" function implementation', function () {
@@ -251,7 +251,7 @@ function checkTipCalculator () {
 function checkPredicateFunctions () {
   const filename = '208-predicate-functions.js'
   const moduleFileName = '../' + moduleName('exercises/208-predicate-functions.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'isVowel')
   it('"isVowel" function implementation', function () {
@@ -301,7 +301,7 @@ function checkPredicateFunctions () {
 function checkFizzbuzz () {
   const filename = '210-fizzbuzz.js'
   const moduleFileName = '../' + moduleName('exercises/210-fizzbuzz.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'fizzbuzz')
   it('"fizzbuzz" function implementation', function () {
@@ -317,7 +317,7 @@ function checkFizzbuzz () {
 function checkNumberJoiners () {
   const filename = '212-number-joiners.js'
   const moduleFileName = '../' + moduleName('exercises/212-number-joiners.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   const fileContents = fs.readFileSync('exercises/212-number-joiners.js', utf8)
   const syntaxTree = esprima.parseScript(fileContents)
@@ -378,13 +378,48 @@ function checkNumberJoiners () {
 }
 
 // -----------------------------------------------------------------------------
+// 213 - Moar Loops
+// -----------------------------------------------------------------------------
+
+function checkMoarLoops () {
+  const filename = '213-moar-loops.js'
+  const moduleFileName = '../' + moduleName('exercises/213-moar-loops.js')
+  const module = getModule(moduleFileName)
+
+  checkForFunction(filename, module, 'removeZAnimals')
+  it('"removeZAnimals" function implementation', function () {
+    assert.deepStrictEqual(module.removeZAnimals(), ['alligator', 'crocodile', 'giraffe'])
+  })
+
+  checkForFunction(filename, module, 'removeAnyWordWithZ')
+  it('"removeAnyWordWithZ" function implementation', function () {
+    assert.deepStrictEqual(module.removeAnyWordWithZ(['a', 'b', 'c']), ['a', 'b', 'c'])
+    assert.deepStrictEqual(module.removeAnyWordWithZ(['a', 'b', 'z', 'c']), ['a', 'b', 'c'])
+    assert.deepStrictEqual(module.removeAnyWordWithZ(['aaa', 'bbb', 'ccc']), ['aaa', 'bbb', 'ccc'])
+    assert.deepStrictEqual(module.removeAnyWordWithZ(['aaa', 'bzb', 'ccc']), ['aaa', 'ccc'])
+    assert.deepStrictEqual(module.removeAnyWordWithZ(['aaZ', 'bbb', 'ccc']), ['bbb', 'ccc'])
+    assert.deepStrictEqual(module.removeAnyWordWithZ(['aaZ', 'z', 'zebra']), [])
+  })
+
+  checkForFunction(filename, module, 'removeWordsWithChar')
+  it('"removeWordsWithChar" function implementation', function () {
+    assert.deepStrictEqual(module.removeWordsWithChar(['aaa', 'bbb', 'ccc'], 'b'), ['aaa', 'ccc'])
+    assert.deepStrictEqual(module.removeWordsWithChar(['pizza', 'beer', 'cheese'], 'E'), ['pizza'])
+    assert.deepStrictEqual(module.removeWordsWithChar(['a', 'b', 'z', 'c', 'c'], 'c'), ['a', 'b', 'z'])
+    assert.deepStrictEqual(module.removeWordsWithChar(['Alabama', 'Alaska', 'Texas'], 'x'), ['Alabama', 'Alaska'])
+    assert.deepStrictEqual(module.removeWordsWithChar([], 'q'), [])
+    assert.deepStrictEqual(module.removeWordsWithChar(['aaa', 'bbb', 'ccc'], 'q'), ['aaa', 'bbb', 'ccc'])
+  })
+}
+
+// -----------------------------------------------------------------------------
 // 214 - Loopy Strings
 // -----------------------------------------------------------------------------
 
 function checkLoopyStrings () {
   const filename = '214-loopy-strings.js'
   const moduleFileName = '../' + moduleName('exercises/214-loopy-strings.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'reverse')
   it('"reverse" function implementation', function () {
@@ -430,7 +465,7 @@ function checkLoopyStrings () {
 function checkFactors () {
   const filename = '218-factors.js'
   const moduleFileName = '../' + moduleName('exercises/218-factors.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'gcd')
   it('"gcd" function implementation', function () {
@@ -456,7 +491,7 @@ function checkFactors () {
 function checkCities () {
   const filename = '220-cities.js'
   const moduleFileName = '../' + moduleName('exercises/220-cities.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'coolCities')
   it('"coolCities" function implementation', function () {
@@ -514,7 +549,7 @@ function checkCities () {
 function checkLongLongVowels () {
   const filename = '230-long-long-vowels.js'
   const moduleFileName = '../' + moduleName('exercises/230-long-long-vowels.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'longLongVowels')
   it('"longLongVowels" function implementation', function () {
@@ -534,7 +569,7 @@ function checkLongLongVowels () {
 function checkNumberArrays () {
   const filename = '216-number-arrays.js'
   const moduleFileName = '../' + moduleName('exercises/216-number-arrays.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'max')
   it('"max" function implementation', function () {
@@ -601,7 +636,7 @@ function checkNumberArrays () {
 function checkRockPaperScissors () {
   const filename = '211-rock-paper-scissors.js'
   const moduleFileName = '../' + moduleName('exercises/211-rock-paper-scissors.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'rockPaperScissors')
   it('"rockPaperScissors" function implementation', function () {
@@ -626,7 +661,7 @@ function checkRockPaperScissors () {
 function checkLeetspeak () {
   const filename = '235-leetspeak.js'
   const moduleFileName = '../' + moduleName('exercises/235-leetspeak.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'leetspeak')
   it('"leetspeak" function implementation', function () {
@@ -648,7 +683,7 @@ function checkLeetspeak () {
 function checkCaesarCipher () {
   const filename = '237-caesar-cipher.js'
   const moduleFileName = '../' + moduleName('exercises/237-caesar-cipher.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'cipher')
   it('"cipher" function implementation', function () {
@@ -676,7 +711,7 @@ function checkCaesarCipher () {
 function checkMakeBoxes () {
   const filename = '250-make-boxes.js'
   const moduleFileName = '../' + moduleName('exercises/250-make-boxes.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'makeSquare')
   it('"makeSquare" function implementation', function () {
@@ -722,7 +757,7 @@ function checkMakeBoxes () {
 function checkMatrixMath () {
   const filename = '255-matrix-math.js'
   const moduleFileName = '../' + moduleName('exercises/255-matrix-math.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'matrixAdd')
   it('"matrixAdd" function implementation', function () {
@@ -910,7 +945,7 @@ const tttBoardDraw = [
 function checkTicTacToe () {
   const filename = '257-tic-tac-toe.js'
   const moduleFileName = '../' + moduleName('exercises/257-tic-tac-toe.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'ticTacToe')
   it('"ticTacToe" function implementation', function () {
@@ -933,7 +968,7 @@ function checkTicTacToe () {
 function checkRecognizeEmployees () {
   const filename = '260-recognize-employees.js'
   const moduleFileName = '../' + moduleName('exercises/260-recognize-employees.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'recognizeEmployees')
   it('"recognizeEmployees" function implementation', function () {
@@ -961,7 +996,7 @@ function checkRecognizeEmployees () {
 function checkSortArrays () {
   const filename = '290-sort-arrays.js'
   const moduleFileName = '../' + moduleName('exercises/290-sort-arrays.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'alphaSort')
   it('"alphaSort" function implementation', function () {
@@ -1012,7 +1047,7 @@ function checkSortArrays () {
 function checkCallNTimes () {
   const filename = '295-call-n-times.js'
   const moduleFileName = '../' + moduleName('exercises/295-call-n-times.js')
-  let module = getModule(moduleFileName)
+  const module = getModule(moduleFileName)
 
   checkForFunction(filename, module, 'callNTimes')
 
@@ -1052,6 +1087,7 @@ if (allSyntaxValid) {
   describe('Predicate Functions', checkPredicateFunctions)
   describe('Fizzbuzz', checkFizzbuzz)
   describe('Rock Paper Scissors', checkRockPaperScissors)
+  describe('Moar Loops', checkMoarLoops)
   describe('Number Joiners', checkNumberJoiners)
   describe('Loopy Strings', checkLoopyStrings)
   describe('Number Arrays', checkNumberArrays)
