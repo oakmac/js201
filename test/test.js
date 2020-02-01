@@ -514,6 +514,29 @@ function checkCities () {
       "      { name: 'Atlanta', temperature: 52.0 },\n" +
       "      { name: 'Detroit', temperature: 48.0 }\n" +
       '    ]')
+    assert.deepStrictEqual(module.coolCities([
+      { name: 'Boca Raton', temperature: 85.0 },
+      { name: 'Houston', temperature: 82.0 },
+      { name: 'Kansas City', temperature: 67.0 },
+      { name: 'Oklahoma City', temperature: 68.0 },
+      { name: 'Portland', temperature: 61.0 },
+      { name: 'Wichita', temperature: 84.0 }
+    ]), [
+      { name: 'Kansas City', temperature: 67.0 },
+      { name: 'Oklahoma City', temperature: 68.0 },
+      { name: 'Portland', temperature: 61.0 }
+    ], 'coolCities([\n' +
+        "      { name: 'Boca Raton', temperature: 85.0 },\n" +
+        "      { name: 'Houston', temperature: 82.0 },\n" +
+        "      { name: 'Kansas City', temperature: 67.0 },\n" +
+        "      { name: 'Oklahoma City', temperature: 68.0 },\n" +
+        "      { name: 'Portland', temperature: 61.0 },\n" +
+        "      { name: 'Wichita', temperature: 84.0 }\n" +
+        '    ] should return [\n' +
+        "      { name: 'Kansas City', temperature: 67.0},\n" +
+        "      { name: 'Oklahoma City', temperature: 68.0 },\n" +
+        "      { name: 'Portland', temperature: 61.0 }\n" +
+        '    ]')
   })
 
   checkForFunction(filename, module, 'cityNames')
