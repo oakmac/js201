@@ -278,18 +278,26 @@ function checkPredicateFunctions () {
   checkForFunction(filename, module, 'isOdd')
   it('"isOdd" function implementation', function () {
     assert.deepStrictEqual(module.isOdd(3), true, 'isOdd(3) should return true')
+    assert.deepStrictEqual(module.isOdd(59), true, 'isOdd(59) should return true')
+    assert.deepStrictEqual(module.isOdd(1277), true, 'isOdd(1277) should return true')
     assert.deepStrictEqual(module.isOdd(-3), true, 'isOdd(-3) should return true')
+    assert.deepStrictEqual(module.isOdd(-9), true, 'isOdd(-9) should return true')
     assert.deepStrictEqual(module.isOdd(100), false, 'isOdd(100) should return false')
     assert.deepStrictEqual(module.isOdd(3.14), false, 'isOdd(3.14) should return false')
     assert.deepStrictEqual(module.isOdd('13'), false, 'isOdd("13") should return false ("13" is a string)')
     assert.deepStrictEqual(module.isOdd({}), false, 'isOdd({}) should return false')
+    assert.deepStrictEqual(module.isOdd([]), false, 'isOdd([]) should return false')
   })
 
   checkForFunction(filename, module, 'isCapitalCity')
   it('"isCapitalCity" function implementation', function () {
-    assert.deepStrictEqual(module.isCapitalCity('Texas', 'Austin'), true, "isCapitalCity('Texas', 'Austin') should return true")
-    assert.deepStrictEqual(module.isCapitalCity('Texas', 'Houston'), false, "isCapitalCity('Texas', 'Houston') should return false")
+    assert.deepStrictEqual(module.isCapitalCity('Alabama', 'Montgomery'), true, "isCapitalCity('Alabama', 'Montgomery') should return true")
     assert.deepStrictEqual(module.isCapitalCity('Alaska', 'Juneau'), true, "isCapitalCity('Alaska', 'Juneau') should return false")
+    assert.deepStrictEqual(module.isCapitalCity('Illinois', 'Springfield'), true, "isCapitalCity('Illinois', 'Springfield') should return true")
+    assert.deepStrictEqual(module.isCapitalCity('Texas', 'Austin'), true, "isCapitalCity('Texas', 'Austin') should return true")
+    assert.deepStrictEqual(module.isCapitalCity('Washington', 'Olympia'), true, "isCapitalCity('Washington', 'Olympia') should return true")
+    assert.deepStrictEqual(module.isCapitalCity('Illinois', 'Chicago'), false, "isCapitalCity('Illinois', 'Chicago') should return false")
+    assert.deepStrictEqual(module.isCapitalCity('Texas', 'Houston'), false, "isCapitalCity('Texas', 'Houston') should return false")
     assert.deepStrictEqual(module.isCapitalCity('Strawberry', 'Mango'), false, "isCapitalCity('Strawberry', 'Mango') should return false")
   })
 }

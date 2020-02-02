@@ -1,4 +1,3 @@
-// TIP:
 // A predicate function is a function that returns boolean true or false
 // They are useful for improving the semantics of checking for conditions.
 // Examples:
