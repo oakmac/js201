@@ -9,3 +9,19 @@
 // Examples:
 // fizzbuzz(3) --> '..fizz'
 // fizzbuzz(15) --> '..fizz.buzzfizz..fizzbuzz.fizz..fizzbuzz'
+
+var fizzbuzz = function(n) {
+  var str = [];
+  if (n%3 == 0 && n&5 == 0) {
+    return str = str + "fizzbuzz";
+  }
+  else if (n%3 == 0 && n%5 != 0) {
+    return str = str + "fizz";
+  }
+  else if (n%3 != 0 && n%5 == 0) {
+    return str = str + "buzz";
+  }
+  else {
+    return str = str + ".";
+  }
+      
